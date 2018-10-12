@@ -1,21 +1,26 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class DataFrame {
-
-    private ArrayList<Column> columns;
-    private int numberOfColumns;
 
     /**
      * Set to true when there's made a shallow copy of DataFrame without all the original columns and then blocks anyone
      * from from adding new data in order to prevent the corruption of original DataFrame all the columns is in.
      */
     private boolean frozen = false;
+    private List<Column> columns;
 
     /**
-     * Default constructor. Given arrays must be of equal lengths.
+     * Default constructor creating empty DataFrame.
+     */
+    public DataFrame(){
+        this.columns = new ArrayList<>();
+    }
+    /**
+     * Given arrays must be of equal lengths.
      * @param columnNames Names of columns to create.
      * @param typeNames Classes of objects to store in columns. Class names must contain full package names.
      */
@@ -25,9 +30,8 @@ public class DataFrame {
 
         this.columns = new ArrayList<>();
         for(int i = 0; i < columnNames.length; i++){
-            columns.add(new Column(columnNames[i], typeNames[i]));
+            this.columns.add(new Column(columnNames[i], typeNames[i]));
         }
-        this.numberOfColumns = columnNames.length;
     }
 
     /**
@@ -36,15 +40,24 @@ public class DataFrame {
      */
     public DataFrame(Column[] columns){
         this.columns = new ArrayList<>(Arrays.asList(columns));
-        this.numberOfColumns = columns.length;
     }
+
+    public void addColumn(Column column){
+        if (columns.isEmpty()){
+            columns.add(column);
+        }
+        else if(columns.get(0).getSize() == 0){
+            columns.add(column);
+        }
+    }
+
 
     /**
      * Add new row to the DataFrame. Parameters must be of correct types (according to column's type information).
      * @param objects List of objects to add. Throws exception if count doesn't match the columns count.
      */
     public void add(Object... objects){
-        if(objects.length != numberOfColumns)
+        if(objects.length != columns.size())
             throw new IllegalArgumentException("Wrong number of arguments");
         if(frozen)
             throw new IllegalStateException("Tried adding new data to a frozen DataFrame");
@@ -129,9 +142,9 @@ public class DataFrame {
      * @return New DataFrame with copied structure.
      */
     public DataFrame copyDataFrameStructure(){
-        String[] columnNames = new String[numberOfColumns];
-        String[] typeNames = new String[numberOfColumns];
-        for(int i = 0; i < numberOfColumns; i++){
+        String[] columnNames = new String[columns.size()];
+        String[] typeNames = new String[columns.size()];
+        for(int i = 0; i < columns.size(); i++){
             columnNames[i] = columns.get(i).getName();
             typeNames[i] = columns.get(i).getTypeName();
         }
@@ -145,8 +158,8 @@ public class DataFrame {
      */
     public DataFrame getRow(int n) { // – zwracającą wiersz o podanym indeksie (jako nową DataFrame)
         DataFrame result = this.copyDataFrameStructure();
-        Object[] toAdd = new Object[numberOfColumns];
-        for(int i = 0; i < numberOfColumns; i++){
+        Object[] toAdd = new Object[columns.size()];
+        for(int i = 0; i < columns.size(); i++){
             toAdd[i] = columns.get(i).getData(n);
         }
         result.add(toAdd);
@@ -163,8 +176,8 @@ public class DataFrame {
         DataFrame result = this.copyDataFrameStructure();
 
         for (int j = from; j < to; j++) {
-            Object[] toAdd = new Object[numberOfColumns];
-            for(int i = 0; i < numberOfColumns; i++){
+            Object[] toAdd = new Object[columns.size()];
+            for(int i = 0; i < columns.size(); i++){
                 toAdd[i] = columns.get(i).getData(j);
             }
             result.add(toAdd);
@@ -194,11 +207,27 @@ public class DataFrame {
         this.frozen = frozen;
     }
 
+    public String[] getColumnsNames(){
+        String[] result = new String[columns.size()];
+        for(int i = 0; i < columns.size(); i++){
+            result[i] = columns.get(i).getName();
+        }
+        return result;
+    }
+
+    public String[] getColumnsTypeNames(){
+        String[] result = new String[columns.size()];
+        for(int i = 0; i < columns.size(); i++){
+            result[i] = columns.get(i).getTypeName();
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < numberOfColumns; i++) {
-            sb.append(columns.get(i).toString());
+        for (Column column : columns) {
+            sb.append(column.toString());
             sb.append('\n');
         }
         return sb.toString();
