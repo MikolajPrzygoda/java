@@ -1,11 +1,15 @@
 import java.util.ArrayList;
 
-public class Column {
-    private String name;
-    private String typeName;
+public class Column{
+
+    protected String name;
+    protected String typeName;
     private ArrayList<Object> data;
 
-    public Column(String name, String typeName) {
+    public Column(){
+    }
+
+    public Column(String name, String typeName){
         this.name = name;
         this.typeName = typeName;
         this.data = new ArrayList<>();
@@ -17,11 +21,11 @@ public class Column {
         this.data = new ArrayList<>(column.data);
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
 
-    public String getTypeName() {
+    public String getTypeName(){
         return typeName;
     }
 
@@ -40,45 +44,53 @@ public class Column {
         return data.size();
     }
 
-    private boolean validate(Object o) {
-        switch (typeName){
+    protected Class getType(){
+        switch(typeName){
             case "byte":
             case "Byte":
-                return o instanceof Byte;
+                return Byte.class;
             case "short":
             case "Short":
-                return o instanceof Short;
+                return Short.class;
             case "int":
             case "Integer":
-                return o instanceof Integer;
+                return Integer.class;
             case "long":
             case "Long":
-                return o instanceof Long;
+                return Long.class;
             case "float":
             case "Float":
-                return o instanceof Float;
+                return Float.class;
             case "double":
             case "Double":
-                return o instanceof Double;
+                return Double.class;
             case "boolean":
             case "Boolean":
-                return o instanceof Boolean;
+                return Boolean.class;
             case "char":
             case "Character":
-                return o instanceof Character;
+                return Character.class;
             case "String":
-                return o instanceof String;
+                try{
+                    return Class.forName("java.lang.String");
+                } catch(ClassNotFoundException e){
+                    return null;
+                }
             default:
-                try {
-                    return Class.forName(typeName).isInstance(o);
-                } catch (ClassNotFoundException e) {
-                    return false;
+                try{
+                    return Class.forName(typeName);
+                } catch(ClassNotFoundException e){
+                    return null;
                 }
         }
     }
 
+    protected boolean validate(Object o){
+        return getType().isInstance(o);
+    }
+
     @Override
-    public String toString() {
+    public String toString(){
         return String.format("%s (%s): ", name, typeName) + data.toString();
     }
 }
