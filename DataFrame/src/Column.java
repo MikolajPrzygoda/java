@@ -1,23 +1,26 @@
+import values.Value;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class Column{
 
     protected String name;
-    protected String typeName;
-    private ArrayList<Object> data;
+    protected Class<? extends Value> type;
+    private ArrayList<Value> data;
 
     public Column(){
     }
 
-    public Column(String name, String typeName){
+    public Column(String name, Class<? extends Value> type){
         this.name = name;
-        this.typeName = typeName;
+        this.type = type;
         this.data = new ArrayList<>();
     }
 
     public Column(Column column){
         this.name = column.name;
-        this.typeName = column.typeName;
+        this.type = column.type;
         this.data = new ArrayList<>(column.data);
     }
 
@@ -25,18 +28,20 @@ public class Column{
         return name;
     }
 
-    public String getTypeName(){
-        return typeName;
+    public Class<? extends Value> getType(){
+        return type;
     }
 
-    public void addData(Object o){
-        if(validate(o))
-            data.add(o);
-        else
-            throw new IllegalArgumentException("Given argument doesn't match the specified column type");
+    public void addData(String s){
+        try {
+            Value v = type.getConstructor().newInstance().create(s);
+            data.add(v);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 
-    public Object getData(int n){
+    public Value getData(int n){
         return data.get(n);
     }
 
@@ -44,53 +49,8 @@ public class Column{
         return data.size();
     }
 
-    protected Class getType(){
-        switch(typeName){
-            case "byte":
-            case "Byte":
-                return Byte.class;
-            case "short":
-            case "Short":
-                return Short.class;
-            case "int":
-            case "Integer":
-                return Integer.class;
-            case "long":
-            case "Long":
-                return Long.class;
-            case "float":
-            case "Float":
-                return Float.class;
-            case "double":
-            case "Double":
-                return Double.class;
-            case "boolean":
-            case "Boolean":
-                return Boolean.class;
-            case "char":
-            case "Character":
-                return Character.class;
-            case "String":
-                try{
-                    return Class.forName("java.lang.String");
-                } catch(ClassNotFoundException e){
-                    return null;
-                }
-            default:
-                try{
-                    return Class.forName(typeName);
-                } catch(ClassNotFoundException e){
-                    return null;
-                }
-        }
-    }
-
-    protected boolean validate(Object o){
-        return getType().isInstance(o);
-    }
-
     @Override
     public String toString(){
-        return String.format("%s (%s): ", name, typeName) + data.toString();
+        return String.format("%s (%s): ", name, type) + data.toString();
     }
 }

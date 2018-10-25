@@ -1,3 +1,5 @@
+import values.Integer;
+
 public class Main{
 
     /**
@@ -6,18 +8,15 @@ public class Main{
      */
 
     public static void main(String[] args){
-        SparseDataFrame sdf = new SparseDataFrame(new String[]{"kol1", "kol2", "kol3"}, "int", "0");
-        sdf.add(1, 2, 3);
-        sdf.add(0, 0, 0);
-        sdf.add(0, 0, 0);
-        sdf.add(4, 5, 6);
-        sdf.add(0, 0, 0);
-        sdf.add(0, 0, 0);
-        sdf.add(7, 8, 9);
-        System.out.println(sdf);
-        DataFrame df = new DataFrame(sdf);
+        
+        DataFrame df = new DataFrame(new String[]{"kol1", "kol2"}, new Class[]{Integer.class, Integer.class});
+        df.add("1", "2");
+        df.add("0", "4");
+        df.add("5", "0");
+        df.add("7", "8");
         System.out.println(df);
-        System.out.println(new SparseDataFrame(df, "0"));
 
+        SparseDataFrame sdf = new SparseDataFrame(df, "0");
+        System.out.println(sdf);
     }
 }

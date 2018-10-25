@@ -1,3 +1,5 @@
+import values.Value;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,16 +24,16 @@ public class DataFrame{
     /**
      * Given arrays must be of equal lengths.
      * @param columnNames Names of columns to create.
-     * @param typeNames   Classes of objects to store in columns. Class names must contain full package names.
+     * @param types   Classes of objects to store in columns.
      * @throws IllegalArgumentException if columnNames and typeNames lengths aren't equal.
      */
-    public DataFrame(String[] columnNames, String[] typeNames){
-        if(columnNames.length != typeNames.length)
+    public DataFrame(String[] columnNames, Class<? extends Value>[] types){
+        if(columnNames.length != types.length)
             throw new IllegalArgumentException("Name and Class arrays lengths don't match up");
 
         this.columns = new ArrayList<>();
         for(int i = 0; i < columnNames.length; i++){
-            this.columns.add(new Column(columnNames[i], typeNames[i]));
+            this.columns.add(new Column(columnNames[i], types[i]));
         }
     }
 
@@ -50,10 +52,10 @@ public class DataFrame{
     public DataFrame(SparseDataFrame sparseDataFrame){
         //copy structure
         String[] names = sparseDataFrame.getColumnsNames();
-        String[] typeNames = sparseDataFrame.getColumnsTypeNames();
+        Class[] types = sparseDataFrame.getColumnsTypes();
         this.columns = new ArrayList<>(names.length);
         for(int i = 0; i < names.length; i++){
-            columns.add(new Column(names[i], typeNames[i]));
+            columns.add(new Column(names[i], types[i]));
         }
 
         //copy data
@@ -63,31 +65,49 @@ public class DataFrame{
     }
 
     /**
-     * Add a new Column to the DataFrame, only if there no rows in the DataFrame.
-     * @param column Column to be added to the DataFrame.
-     * @throws IllegalStateException if there's anything in the DataFrame when adding new Column.
+     * Constructs DataFrame and reads data from file. First line consists of names of the columns to create.
+     * @param fileName file to read.
+     * @param types types of columns.
      */
-    public void addColumn(Column column){
-        if(this.size() <= 0) //must be 0 or -1
-            columns.add(column);
-        else
-            throw new IllegalStateException("Can't add new columns when there's already any data in the DataFrame");
+    public DataFrame(String fileName, Class<? extends Value>[] types){
+
     }
 
     /**
-     * Add new row to the DataFrame. Parameters must be of correct types (according to column's type information).
-     * @param objects List of objects to add. Throws exception if count doesn't match the columns count.
+     * Constructs DataFrame and reads data from file.
+     * @param fileName file to read.
+     * @param types types of columns.
+     * @param columnNames names of columns.
+     */
+    public DataFrame(String fileName, Class<? extends Value>[] types, String[] columnNames){
+
+    }
+
+    /**
+     * Add a new Column to the DataFrame, only if there's no rows in the DataFrame.
+     * @param column Column to be added to the DataFrame.
+     * @throws IllegalStateException if there's anything in the DataFrame or the column.
+     */
+    public void addColumn(Column column){
+        if(this.size() > 0 || column.getSize() > 0) //must be 0 or -1
+            throw new IllegalStateException("Can't add new columns when there's already any data in the DataFrame");
+        columns.add(column);
+    }
+
+    /**
+     * Add new row to the DataFrame. Parameters will be converted to correct type.
+     * @param values List of objects to add.
      * @throws IllegalArgumentException if number of arguments doesn't match DataFrame width.
      * @throws IllegalStateException    if the DataFrame is frozen when adding new row.
      */
-    public void add(Object... objects){
-        if(objects.length != this.width())
+    public void add(String... values){
+        if(values.length != this.width())
             throw new IllegalArgumentException("Wrong number of arguments");
         if(frozen)
             throw new IllegalStateException("Tried adding new data to a frozen DataFrame");
 
-        for(int i = 0; i < objects.length; i++){
-            columns.get(i).addData(objects[i]);
+        for(int i = 0; i < values.length; i++){
+            columns.get(i).addData(values[i]);
         }
     }
 
@@ -110,6 +130,7 @@ public class DataFrame{
         return columns.size();
     }
 
+    //TODO: fix shallow/deep copying
     /**
      * Returns one column from DataFrame. Helper function with copy parameter for two argument method set to true.
      * @param columnName Name of the column to retrieve.
@@ -134,6 +155,7 @@ public class DataFrame{
         return null;
     }
 
+    //TODO: fix shallow/deep copying
     /**
      * Returns requested columns from DataFrame. Helper function with copy parameter for two argument method set to true
      * @param columnNames Names of columns to copy.
@@ -166,7 +188,7 @@ public class DataFrame{
         if(resultColumns.size() != columnNames.length)
             throw new IllegalArgumentException("Couldn't find all requested columns");
 
-        Column[] newColsArr = resultColumns.toArray(new Column[resultColumns.size()]);
+        Column[] newColsArr = resultColumns.toArray(new Column[0]);
         DataFrame result = new DataFrame(newColsArr);
         if(!copy)
             result.setFrozen(true);
@@ -178,7 +200,7 @@ public class DataFrame{
      * @return New DataFrame with copied structure.
      */
     protected DataFrame copyStructure(){
-        return new DataFrame(this.getColumnsNames(), this.getColumnsTypeNames());
+        return new DataFrame(this.getColumnsNames(), this.getColumnsTypes());
     }
 
     /**
@@ -187,12 +209,12 @@ public class DataFrame{
      * @return Array of Objects from n-th row.
      * @throws IllegalArgumentException if n is bigger than current size of the column.
      */
-    public Object[] getRowData(int n){
+    public String[] getRowData(int n){
         if(n >= size())
             throw new IllegalArgumentException("Index of wanted row bigger than current size of the column.");
-        Object[] result = new Object[width()];
+        String[] result = new String[width()];
         for(int i = 0; i < width(); i++){
-            result[i] = columns.get(i).getData(n);
+            result[i] = columns.get(i).getData(n).toString();
         }
         return result;
     }
@@ -204,9 +226,9 @@ public class DataFrame{
      */
     public DataFrame getRow(int n){
         DataFrame result = this.copyStructure();
-        Object[] toAdd = new Object[width()];
+        String[] toAdd = new String[width()];
         for(int i = 0; i < width(); i++){
-            toAdd[i] = columns.get(i).getData(n);
+            toAdd[i] = columns.get(i).getData(n).toString();
         }
         result.add(toAdd);
         return result;
@@ -220,10 +242,10 @@ public class DataFrame{
      */
     public DataFrame getRows(int from, int to){
         DataFrame result = this.copyStructure();
-        Object[] toAdd = new Object[width()];
+        String[] toAdd = new String[width()];
         for(int j = from; j < to; j++){
             for(int i = 0; i < width(); i++){
-                toAdd[i] = columns.get(i).getData(j);
+                toAdd[i] = columns.get(i).getData(j).toString();
             }
             result.add(toAdd);
         }
@@ -233,7 +255,7 @@ public class DataFrame{
     /**
      * 'frozen' field set to true means that this particular DataFrame is a shallow copy and modifying data in it will
      * result in a corrupted original (different sizes of columns for example).
-     * @return Value of frozen field.
+     * @return value of frozen field.
      */
     public boolean isFrozen(){
         return frozen;
@@ -267,10 +289,10 @@ public class DataFrame{
      * Returns array with column typeNames.
      * @return array with column typeNames.
      */
-    public String[] getColumnsTypeNames(){
-        String[] result = new String[width()];
+    public Class[] getColumnsTypes(){
+        Class[] result = new Class[width()];
         for(int i = 0; i < width(); i++){
-            result[i] = columns.get(i).getTypeName();
+            result[i] = columns.get(i).getType();
         }
         return result;
     }
