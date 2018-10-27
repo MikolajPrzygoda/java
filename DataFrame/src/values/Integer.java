@@ -4,15 +4,17 @@ public class Integer extends Value{
 
     private int value;
 
-    public Integer(){}
-
     public Integer(int value) {
         this.value = value;
     }
 
+    public Integer(java.lang.String s){
+        this.value = java.lang.Integer.valueOf(s);
+    }
+
     @Override
     public Value create(java.lang.String s) {
-        return new Integer(java.lang.Integer.valueOf(s));
+        return new Integer(s);
     }
 
     @Override
@@ -76,5 +78,10 @@ public class Integer extends Value{
     @Override
     public java.lang.String toString() {
         return java.lang.String.valueOf(value);
+    }
+
+    @Override
+    public Integer clone(){
+        return new Integer(this.value);
     }
 }

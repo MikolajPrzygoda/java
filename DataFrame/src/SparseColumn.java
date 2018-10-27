@@ -75,7 +75,7 @@ public class SparseColumn extends Column {
             size++;
         else { //if not, add new exception and the increment size.
             try {
-                data.add(new COOValue(size, type.getConstructor().newInstance().create(s)));
+                data.add(new COOValue(size, type.getConstructor(String.class).newInstance(s)));
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -101,7 +101,7 @@ public class SparseColumn extends Column {
 
         // if not in the exception list - create new object from hidden.
         try {
-            result = type.getConstructor().newInstance(hidden);
+            result = type.getConstructor(String.class).newInstance(hidden);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }

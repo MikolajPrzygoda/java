@@ -34,7 +34,7 @@ public class Column{
 
     public void addData(String s){
         try {
-            Value v = type.getConstructor().newInstance().create(s);
+            Value v = type.getConstructor(java.lang.String.class).newInstance(s);
             data.add(v);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();

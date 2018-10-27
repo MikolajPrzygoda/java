@@ -6,10 +6,12 @@ public class DateTime extends Value{
 
     private Date value;
 
-    public DateTime(){}
-
     public DateTime(Date value) {
         this.value = value;
+    }
+
+    public DateTime(java.lang.String s){
+        Date.parse(s);
     }
 
     @Override
@@ -74,6 +76,11 @@ public class DateTime extends Value{
 
     @Override
     public java.lang.String toString() {
-        return null;
+        return value.toString();
+    }
+
+    @Override
+    public DateTime clone(){
+        return new DateTime(this.value);
     }
 }

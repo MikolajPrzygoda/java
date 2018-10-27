@@ -2,6 +2,7 @@ import values.Value;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -295,6 +296,15 @@ public class DataFrame{
             result[i] = columns.get(i).getType();
         }
         return result;
+    }
+
+    /**
+     * TODO
+     * @param columnNames
+     * @return
+     */
+    public DataFrameGroup groupBy(String[] columnNames){
+        return new DataFrameGroup(this, columnNames);
     }
 
     /**

@@ -4,15 +4,13 @@ public class String extends Value{
 
     private java.lang.String value;
 
-    public String(){}
-
     public String(java.lang.String value) {
         this.value = value;
     }
 
     @Override
     public Value create(java.lang.String s) {
-        return null;
+        return new String(s);
     }
 
     @Override
@@ -73,5 +71,10 @@ public class String extends Value{
     @Override
     public java.lang.String toString() {
         return null;
+    }
+
+    @Override
+    public String clone(){
+        return new String(this.value);
     }
 }

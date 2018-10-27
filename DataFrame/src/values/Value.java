@@ -1,6 +1,6 @@
 package values;
 
-public abstract class Value {
+public abstract class Value implements Cloneable{
     public abstract Value create(java.lang.String s);
     public abstract Value add(Value other);
     public abstract Value sub(Value other);

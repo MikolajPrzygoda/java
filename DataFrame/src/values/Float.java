@@ -4,15 +4,17 @@ public class Float extends Value{
 
     private float value;
 
-    public Float(){}
-
     public Float(float value) {
         this.value = value;
     }
 
+    public Float(java.lang.String s){
+        this.value = java.lang.Float.valueOf(s);
+    }
+
     @Override
     public Value create(java.lang.String s) {
-        return new Float(java.lang.Float.valueOf(s));
+        return new Float(s);
     }
 
     @Override
@@ -77,4 +79,10 @@ public class Float extends Value{
     public java.lang.String toString() {
         return java.lang.String.valueOf(value);
     }
+
+    @Override
+    public Float clone(){
+        return new Float(this.value);
+    }
 }
+

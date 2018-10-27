@@ -4,15 +4,17 @@ public class Double extends Value{
 
     private double value;
 
-    public Double(){}
-
     public Double(double value) {
         this.value = value;
     }
 
+    public Double(java.lang.String s){
+        this.value = java.lang.Double.valueOf(s);
+    }
+
     @Override
     public Value create(java.lang.String s) {
-        return new Double(java.lang.Double.valueOf(s));
+        return new Double(s);
     }
 
     @Override
@@ -76,5 +78,10 @@ public class Double extends Value{
     @Override
     public java.lang.String toString() {
         return java.lang.String.valueOf(value);
+    }
+
+    @Override
+    public Double clone(){
+        return new Double(this.value);
     }
 }
