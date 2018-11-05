@@ -1,20 +1,20 @@
 package values;
 
-public class Float extends Value{
+public class FloatV extends Value {
 
     private float value;
 
-    public Float(float value) {
+    public FloatV(float value) {
         this.value = value;
     }
 
-    public Float(java.lang.String s){
-        this.value = java.lang.Float.valueOf(s);
+    public FloatV(String s) {
+        this.value = Float.valueOf(s);
     }
 
     @Override
-    public Value create(java.lang.String s) {
-        return new Float(s);
+    public Value create(String s) {
+        return new FloatV(s);
     }
 
     @Override
@@ -69,20 +69,20 @@ public class Float extends Value{
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof java.lang.Float)
-            return (java.lang.Float) obj == value;
+        if (obj instanceof Float)
+            return (Float) obj == value;
         else
             return false;
     }
 
     @Override
-    public java.lang.String toString() {
-        return java.lang.String.valueOf(value);
+    public FloatV clone() {
+        return new FloatV(value);
     }
 
     @Override
-    public Float clone(){
-        return new Float(this.value);
+    public String toString() {
+        return String.valueOf(value);
     }
 }
 

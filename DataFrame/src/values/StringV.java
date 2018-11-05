@@ -1,40 +1,36 @@
 package values;
 
-public class Integer extends Value{
+public class StringV extends Value {
 
-    private int value;
+    private String value;
 
-    public Integer(int value) {
+    public StringV(String value) {
         this.value = value;
     }
 
-    public Integer(java.lang.String s){
-        this.value = java.lang.Integer.valueOf(s);
-    }
-
     @Override
-    public Value create(java.lang.String s) {
-        return new Integer(s);
+    public Value create(String s) {
+        return new StringV(s);
     }
 
     @Override
     public Value add(Value other) {
-        return new Integer(value + ((Integer) other).value);
+        return null;
     }
 
     @Override
     public Value sub(Value other) {
-        return new Integer(value - ((Integer) other).value);
+        return null;
     }
 
     @Override
     public Value mul(Value other) {
-        return new Integer(value * ((Integer) other).value);
+        return null;
     }
 
     @Override
     public Value div(Value other) {
-        return new Integer(value / ((Integer) other).value);
+        return null;
     }
 
     @Override
@@ -69,19 +65,16 @@ public class Integer extends Value{
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof java.lang.Integer)
-            return (java.lang.Integer) obj == value;
-        else
-            return false;
+        return false;
     }
 
     @Override
-    public java.lang.String toString() {
-        return java.lang.String.valueOf(value);
+    public StringV clone() {
+        return new StringV(value);
     }
 
     @Override
-    public Integer clone(){
-        return new Integer(this.value);
+    public String toString() {
+        return value;
     }
 }

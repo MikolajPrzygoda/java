@@ -1,16 +1,23 @@
 package values;
 
-public class String extends Value{
+import java.time.LocalDate;
+import java.util.Date;
 
-    private java.lang.String value;
+public class DateTimeV extends Value {
 
-    public String(java.lang.String value) {
+    private LocalDate value;
+
+    public DateTimeV(LocalDate value) {
         this.value = value;
     }
 
+    public DateTimeV(String s) {
+        Date.parse(s);
+    }
+
     @Override
-    public Value create(java.lang.String s) {
-        return new String(s);
+    public Value create(String s) {
+        return null;
     }
 
     @Override
@@ -69,12 +76,12 @@ public class String extends Value{
     }
 
     @Override
-    public java.lang.String toString() {
-        return null;
+    public DateTimeV clone() {
+        return new DateTimeV(value);
     }
 
     @Override
-    public String clone(){
-        return new String(this.value);
+    public String toString() {
+        return value.toString();
     }
 }

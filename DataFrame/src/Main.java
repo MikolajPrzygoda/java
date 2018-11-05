@@ -1,4 +1,4 @@
-import values.Integer;
+import values.IntegerV;
 
 public class Main{
 
@@ -9,7 +9,7 @@ public class Main{
 
     public static void main(String[] args){
 
-        DataFrame df = new DataFrame(new String[]{"kol1", "kol2", "kol3"}, new Class[]{Integer.class, Integer.class, Integer.class});
+        DataFrame df = new DataFrame(new String[]{"kol1", "kol2", "kol3"}, new Class[]{IntegerV.class, IntegerV.class, IntegerV.class});
         df.add("1", "1", "20");
         df.add("0", "2", "19");
         df.add("1", "3", "18");

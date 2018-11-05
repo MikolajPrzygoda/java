@@ -1,42 +1,40 @@
 package values;
 
-import java.util.Date;
+public class IntegerV extends Value {
 
-public class DateTime extends Value{
+    private int value;
 
-    private Date value;
-
-    public DateTime(Date value) {
+    public IntegerV(int value) {
         this.value = value;
     }
 
-    public DateTime(java.lang.String s){
-        Date.parse(s);
+    public IntegerV(String s) {
+        this.value = Integer.valueOf(s);
     }
 
     @Override
-    public Value create(java.lang.String s) {
-        return null;
+    public Value create(String s) {
+        return new IntegerV(s);
     }
 
     @Override
     public Value add(Value other) {
-        return null;
+        return new IntegerV(value + ((IntegerV) other).value);
     }
 
     @Override
     public Value sub(Value other) {
-        return null;
+        return new IntegerV(value - ((IntegerV) other).value);
     }
 
     @Override
     public Value mul(Value other) {
-        return null;
+        return new IntegerV(value * ((IntegerV) other).value);
     }
 
     @Override
     public Value div(Value other) {
-        return null;
+        return new IntegerV(value / ((IntegerV) other).value);
     }
 
     @Override
@@ -71,16 +69,19 @@ public class DateTime extends Value{
 
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (obj instanceof Integer)
+            return (Integer) obj == value;
+        else
+            return false;
     }
 
     @Override
-    public java.lang.String toString() {
-        return value.toString();
+    public IntegerV clone() {
+        return new IntegerV(value);
     }
 
     @Override
-    public DateTime clone(){
-        return new DateTime(this.value);
+    public String toString() {
+        return String.valueOf(value);
     }
 }

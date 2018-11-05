@@ -13,7 +13,7 @@ public class DataFrameGroup implements Groupby{
         for(int i = 0; i < df.size(); i++){
             String key = df.getColumn(groupedBy).getData(i).toString();
             if(map.containsKey(key)){
-                map.get(key).add(df.getRowData(i));
+                map.get(key).add(df.getValuesRow(i));
             } else{
                 map.put(key, df.getRow(i));
             }
@@ -28,7 +28,7 @@ public class DataFrameGroup implements Groupby{
     @Override
     public DataFrame min(){
         return null;
-    }
+    }   
 
     @Override
     public DataFrame mean(){

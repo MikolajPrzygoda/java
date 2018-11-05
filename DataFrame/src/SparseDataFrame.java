@@ -1,318 +1,228 @@
+import values.COOValue;
 import values.Value;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class SparseDataFrame extends DataFrame{
+public class SparseDataFrame extends DataFrame {
 
-    private List<SparseColumn> columns;
+    private String hidden;
+    private int size;
 
-    /**
-     * Default constructor creating empty SparseDataFrame.
-     */
-    public SparseDataFrame(){
-        this.columns = new ArrayList<>();
+    public SparseDataFrame(String[] columnNames, Class<? extends Value> type, String hidden) {
+        this.hidden = hidden;
+        this.size = 0;
+        for (String name : columnNames)
+            addColumn(new Column(name, type));
     }
 
-    public SparseDataFrame(String[] columnNames, Class<? extends Value> type, String hidden){
-        columns = new ArrayList<>(columnNames.length);
-        for(String columnName : columnNames){
-            columns.add(new SparseColumn(columnName, type, hidden));
-        }
-    }
-
-    public SparseDataFrame(DataFrame dataFrame, String hidden){
-        if(dataFrame.width() > 0){
+    public SparseDataFrame(DataFrame dataFrame, String hidden) {
+        this.hidden = hidden;
+        this.size = 0;
+        if (dataFrame.width() > 0) {
             // Check if they are of the same type
-            Class[] typeNames = dataFrame.getColumnsTypes();
-            Class typeName = typeNames[0];
-            for(Class c : typeNames)
-                if(!c.equals(typeName))
-                    throw new UnsupportedOperationException("Can't convert a DataFrame with different typeNames in it.");
+            Class[] types = dataFrame.getColumnsTypes();
+            Class type = types[0];
+            for (Class c : types)
+                if (!c.equals(type))
+                    throw new UnsupportedOperationException("Can't convert a DataFrame with different types in it.");
 
             // Create columns
-            columns = new ArrayList<>();
+            columns = new ArrayList<>(dataFrame.width());
             String[] names = dataFrame.getColumnsNames();
-            for(String name : names){
-                columns.add(new SparseColumn(name, typeName, hidden));
+            for (String name : names) {
+                columns.add(new Column(name, type));
             }
 
             // Copy data row by row
-            for(int i = 0; i < dataFrame.size(); i++)
-                add(dataFrame.getRowData(i));
+            for (int i = 0; i < dataFrame.size(); i++)
+                add(dataFrame.getValuesRow(i));
         }
     }
 
     /**
-     * Constructs a shallow copy
-     * @param columns SparseColumns to make a copy of in a new SparseDataFrame object.
+     * Copy constructor, does a deep copy of given columns.
+     *
+     * @param columns Columns to make a copy of in a new SparseDataFrame object.
+     * @param hidden  String representation of the default value.
      */
-    public SparseDataFrame(SparseColumn[] columns){
-        this.columns = new ArrayList<>(Arrays.asList(columns));
-    }
+    public SparseDataFrame(Column[] columns, String hidden) {
+        this.hidden = hidden;
+        this.size = 0;
+        this.columns = new ArrayList<>(columns.length);
 
-    /**
-     * Returns number of rows in the SparseDataFrame or -1 if there's no columns in the SparseDataFrame.
-     * @return number of rows in the SparseDataFrame.
-     */
-    @Override
-    public int size(){
-        if(width() > 0)
-            return columns.get(0).getSize();
-        else
-            return -1;
-    }
-
-    /**
-     * Returns number of columns in the SparseDataFrame.
-     * @return number of columns in the SparseDataFrame.
-     */
-    @Override
-    public int width(){
-        return columns.size();
-    }
-
-    /**
-     * Add a new SparseColumn to the SparseDataFrame, only if there no rows in the SparseDataFrame.
-     * @param column SparseColumn to be added to the SparseDataFrame.
-     * @throws IllegalStateException if there's any data in the SparseDataFrame when adding new SparseColumn.
-     */
-    public void addColumn(SparseColumn column){
-        if(this.size() <= 0) //must be 0 or -1
-            columns.add(column);
-        else
-            throw new IllegalStateException("Can't add new columns when there's already any data in the DataFrame");
-    }
-
-    //TODO: fix shallow/deep copy
-    /**
-     * Returns one column from DataFrame. Helper function with copy parameter for two argument method set to true.
-     * @param columnName Name of the column to retrieve.
-     * @return Wanted copied column object.
-     */
-    @Override
-    public SparseColumn getColumn(String columnName){
-        return getColumn(columnName, true);
-    }
-
-    /**
-     * Returns one column from SparseDataFrame. Can do deep or shallow copy of the columns.
-     * @param columnName Names of columns to copy.
-     * @param copy       Whether to make of deep or shallow copy, true if deep.
-     * @return Wanted copied column object.
-     */
-    @Override
-    public SparseColumn getColumn(String columnName, boolean copy){
-        for(SparseColumn column : columns){
-            if(column.getName().equals(columnName)){
-                return copy ? new SparseColumn(column) : column;
-            }
-        }
-        return null;
+        for (Column column : columns)
+            this.columns.add(new Column(column));
     }
 
     /**
      * Returns requested columns from SparseDataFrame.
      * Helper function with copy parameter for two argument method set to true
+     *
      * @param columnNames Names of columns to copy.
      * @return New SparseDataFrame with copied requested columns.
      */
     @Override
-    public SparseDataFrame getColumns(String[] columnNames){
+    public SparseDataFrame getColumns(String[] columnNames) {
         return getColumns(columnNames, true);
     }
 
     /**
      * Returns requested columns from SparseDataFrame. Can do a deep or shallow copy of the columns.
+     *
      * @param columnNames Names of columns to copy.
      * @param copy        Whether to make of deep or shallow copy, true if deep.
      * @return New SparseDataFrame with copied requested columns.
      * @throws IllegalArgumentException if not all of the requested columns were found.
      */
     @Override
-    public SparseDataFrame getColumns(String[] columnNames, boolean copy){
-        ArrayList<SparseColumn> resultColumns = new ArrayList<>();
-        for(String columnName : columnNames){
-            for(SparseColumn column : columns){
-                if(column.getName().equals(columnName)){
-                    if(copy)
-                        resultColumns.add(new SparseColumn(column));
-                    else
-                        resultColumns.add(column);
-                }
-            }
-        }
-
-        if(resultColumns.size() != columnNames.length)
-            throw new IllegalArgumentException("Couldn't find all requested columns");
-
-        SparseColumn[] newColsArr = resultColumns.toArray(new SparseColumn[0]);
-        SparseDataFrame result = new SparseDataFrame(newColsArr);
-        if(!copy)
-            result.setFrozen(true);
-        return result;
+    public SparseDataFrame getColumns(String[] columnNames, boolean copy) {
+        return new SparseDataFrame(((DataFrame) this).getColumns(columnNames, copy), hidden);
     }
 
     /**
      * Helper function to copy only the column structure without the data in them.
+     *
      * @return New SparseDataFrame with copied structure.
      */
     @Override
-    protected SparseDataFrame copyStructure(){
-        return new SparseDataFrame(getColumnsNames(), getColumnsType(), getHidden());
+    protected SparseDataFrame copyStructure() {
+        return new SparseDataFrame(getColumnsNames(), getColumnsTypes()[0], getHidden());
     }
 
     /**
      * Get new SparseDataFrame with only n-th row of the original one in it.
+     *
      * @param n number of row to copy.
      * @return New SparseDataFrame with only one row copied.
      */
     @Override
-    public SparseDataFrame getRow(int n){
-        SparseDataFrame result = copyStructure();
-        String[] toAdd = new String[width()];
-        for(int i = 0; i < width(); i++){
-            toAdd[i] = columns.get(i).getData(n).toString();
-        }
-        result.add(toAdd);
-        return result;
+    public SparseDataFrame getRow(int n) {
+        return new SparseDataFrame(((DataFrame) this).getRow(n), hidden);
     }
 
     /**
      * Get new SparseDataFrame with only specified rows of the original one in it.
+     *
      * @param from Starting row to copy. (including, row 0).
      * @param to   Ending row to copy (excluding).
      * @return New SparseDataFrame with only specified rows copied.
      */
     @Override
-    public SparseDataFrame getRows(int from, int to){
-        SparseDataFrame result = this.copyStructure();
-        String[] toAdd = new String[width()];
-        for(int j = from; j < to; j++){
-            for(int i = 0; i < width(); i++){
-                toAdd[i] = columns.get(i).getData(j).toString();
+    public SparseDataFrame getRows(int from, int to) {
+        return new SparseDataFrame(((DataFrame) this).getRows(from, to), hidden);
+    }
+
+    /**
+     * Get n-th row of DataFrame as Value[].
+     *
+     * @param n number of row to return.
+     * @return Array of values in the n-th row.
+     * @throws IndexOutOfBoundsException if n is bigger or equal than current size of the column.
+     */
+    @Override
+    public Value[] getValuesRow(int n) {
+        if (n >= size())
+            throw new IndexOutOfBoundsException("Requested index: " + n + ", current column size: " + size());
+        Value[] result = new Value[width()];
+        for (int i = 0; i < width(); i++) {
+            COOValue exception = null;
+            for (int j = 0; j < columns.get(i).size(); j++) {
+                COOValue pair = (COOValue) columns.get(i).getData(j);
+                if (n == pair.getIndex()) {
+                    exception = pair;
+                    break;
+                }
             }
-            result.add(toAdd);
+            if (exception == null) {
+                result[i] = convertToType(hidden);
+            } else
+                result[i] = exception.getValue();
         }
         return result;
     }
 
     /**
-     * Add new row to the DataFrame.
+     * Add new row to the SparseDataFrame.
+     *
      * @param objects List of objects to add. Throws exception if count doesn't match the columns count.
      * @throws IllegalArgumentException if number of arguments doesn't match DataFrame width.
-     * @throws IllegalStateException    if the DataFrame is frozen when adding new row.
+     * @throws IllegalStateException    if the DataFrame is isReadOnly when adding new row.
+     * @throws IllegalStateException    if the DataFrame doesn't have any columns.
      */
     @Override
-    public void add(String... objects){
-        if(objects.length != this.width())
+    public void add(String... objects) {
+        if (objects.length != this.width())
             throw new IllegalArgumentException("Wrong number of arguments");
-        if(frozen)
-            throw new IllegalStateException("Tried adding new data to a frozen DataFrame");
+        if (width() == 0)
+            throw new IllegalStateException("Tried adding new data to a DataFrame with no columns");
+        if (isReadOnly)
+            throw new IllegalStateException("Tried adding new data to a isReadOnly DataFrame");
 
-        for(int i = 0; i < objects.length; i++){
-            columns.get(i).addData(objects[i]);
+        for (int i = 0; i < objects.length; i++) {
+            if (!objects[i].equals(hidden)) {
+                COOValue exception = new COOValue(size, convertToType(objects[i]));
+                columns.get(i).addData(exception);
+            }
+            size++;
         }
     }
 
     /**
-     * Get n-th row of DataFrame as Object[].
-     * @param n number of row to return.
-     * @return Array of Objects from n-th row.
-     * @throws IllegalArgumentException if n is bigger than current size of the column.
+     * Add new row to the SparseDataFrame.
+     *
+     * @param values List of objects to add. Throws exception if count doesn't match the columns count.
+     * @throws IllegalArgumentException if number of arguments doesn't match DataFrame width.
+     * @throws IllegalStateException    if the DataFrame is isReadOnly when adding new row.
+     * @throws IllegalStateException    if the DataFrame doesn't have any columns.
      */
     @Override
-    public String[] getRowData(int n){
-        if(n >= size())
-            throw new IllegalArgumentException("Index of wanted row bigger than current size of the column.");
-        String[] result = new String[width()];
-        for(int i = 0; i < width(); i++){
-            result[i] = columns.get(i).getData(n).toString();
+    public void add(Value... values) {
+        if (values.length != this.width())
+            throw new IllegalArgumentException("Wrong number of arguments");
+        if (width() == 0)
+            throw new IllegalStateException("Tried adding new data to a DataFrame with no columns");
+        if (isReadOnly)
+            throw new IllegalStateException("Tried adding new data to a isReadOnly DataFrame");
+
+        for (int i = 0; i < values.length; i++) {
+            if (!values[i].toString().equals(hidden)) {
+                COOValue exception = new COOValue(size, values[i]);
+                columns.get(i).addData(exception);
+            }
+            size++;
         }
-        return result;
     }
 
-    /**
-     * 'frozen' field set to true means that this particular DataFrame is a shallow copy and modifying data in it will
-     * result in a corrupted original (different sizes of columns for example).
-     * @return values.values of frozen field.
-     */
-    @Override
-    public boolean isFrozen(){
-        return frozen;
-    }
-
-    /**
-     * Sets isFrozen field. Use if you know the consequences. By modifying a shallow copy of DataFrame you can corrupt
-     * the original because it will have uneven number of rows in different columns which shouldn't be a case.
-     * @param frozen value of frozen to set.
-     */
-    @Override
-    public void setFrozen(boolean frozen){
-        if(this.frozen && !frozen)
-            System.out.println("You're unfreezing a frozen DataFrame, this may lead " +
-                    "to messing up a DataFrame this one is a shallow copy of, be aware.");
-        this.frozen = frozen;
-    }
-
-    /**
-     * Returns array with column names.
-     * @return array with column names.
-     */
-    @Override
-    public String[] getColumnsNames(){
-        String[] result = new String[width()];
-        for(int i = 0; i < width(); i++){
-            result[i] = columns.get(i).getName();
+    private Value convertToType(String s) {
+        if (width() > 0) {
+            try {
+                return columns.get(0).getType().getConstructor(String.class).newInstance(s);
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
         }
-        return result;
-    }
-
-    /**
-     * Returns array with column typeNames.
-     * @return array with column typeNames.
-     */
-    @Override
-    public Class[] getColumnsTypes(){
-        Class[] result = new Class[width()];
-        for(int i = 0; i < width(); i++){
-            result[i] = columns.get(i).getType();
-        }
-        return result;
+        System.out.println("Tried converting a value when there's no columns in data frame, returned null.");
+        return null;
     }
 
     /**
      * Returns string representation of DataFrame column by column, each in new row.
+     *
      * @return string representation of DataFrame.
      */
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Column column : columns){
+        for (Column column : columns) {
             sb.append(column.toString());
             sb.append('\n');
         }
         return sb.toString();
     }
 
-    /**
-     * Returns columns type. Empty string if there's no column.
-     * @return columns type.
-     */
-    public Class<? extends Value> getColumnsType(){
-        if(size() > 0)
-            return columns.get(0).getType();
-        else
-            return null;
-    }
-
-
-    public String getHidden(){
-        if(size() > 0)
-            return columns.get(0).getHidden();
-        else
-            return null;
+    public String getHidden() {
+        return hidden;
     }
 
 }

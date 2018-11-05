@@ -1,20 +1,20 @@
 package values;
 
-public class Double extends Value{
+public class DoubleV extends Value {
 
     private double value;
 
-    public Double(double value) {
+    public DoubleV(double value) {
         this.value = value;
     }
 
-    public Double(java.lang.String s){
-        this.value = java.lang.Double.valueOf(s);
+    public DoubleV(String s) {
+        this.value = Double.valueOf(s);
     }
 
     @Override
-    public Value create(java.lang.String s) {
-        return new Double(s);
+    public Value create(String s) {
+        return new DoubleV(s);
     }
 
     @Override
@@ -69,19 +69,19 @@ public class Double extends Value{
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof java.lang.Double)
-            return (java.lang.Double) obj == value;
+        if (obj instanceof Double)
+            return (Double) obj == value;
         else
             return false;
     }
 
     @Override
-    public java.lang.String toString() {
-        return java.lang.String.valueOf(value);
+    public DoubleV clone() {
+        return new DoubleV(value);
     }
 
     @Override
-    public Double clone(){
-        return new Double(this.value);
+    public String toString() {
+        return String.valueOf(value);
     }
 }
