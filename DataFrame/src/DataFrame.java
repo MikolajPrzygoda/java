@@ -75,7 +75,18 @@ public class DataFrame {
      * @param types    types of columns.
      */
     public DataFrame(String fileName, Class<? extends Value>[] types) {
+        String[] data = Util.loadFile(fileName);
+        String[] columnNames = data[0].split(",");
 
+        this.columns = new ArrayList<>(columnNames.length);
+        for (int i = 0; i < columnNames.length; i++) {
+            this.columns.add(new Column(columnNames[i], types[i]));
+        }
+        for (int i = 1; i < data.length; i++) {
+            if (i % 10000 == 0)
+                System.out.println("Added " + i + " out of " + data.length + " lines.");
+            add(data[i].split(","));
+        }
     }
 
     /**
@@ -86,7 +97,15 @@ public class DataFrame {
      * @param columnNames names of columns.
      */
     public DataFrame(String fileName, Class<? extends Value>[] types, String[] columnNames) {
+        String[] data = Util.loadFile(fileName);
 
+        this.columns = new ArrayList<>(columnNames.length);
+        for (int i = 0; i < columnNames.length; i++) {
+            this.columns.add(new Column(columnNames[i], types[i]));
+        }
+        for (String line : data) {
+            add(line.split(","));
+        }
     }
 
     /**

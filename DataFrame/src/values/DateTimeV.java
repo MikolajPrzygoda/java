@@ -1,7 +1,6 @@
 package values;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class DateTimeV extends Value {
 
@@ -12,7 +11,8 @@ public class DateTimeV extends Value {
     }
 
     public DateTimeV(String s) {
-        Date.parse(s);
+        String[] date = s.split("-");
+        value = LocalDate.of(Integer.valueOf(date[0]), Integer.valueOf(date[1]), Integer.valueOf(date[2]));
     }
 
     @Override
@@ -82,6 +82,6 @@ public class DateTimeV extends Value {
 
     @Override
     public String toString() {
-        return value.toString();
+        return value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfWeek().getValue();
     }
 }
