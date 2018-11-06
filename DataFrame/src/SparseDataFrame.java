@@ -143,6 +143,35 @@ public class SparseDataFrame extends DataFrame {
     }
 
     /**
+     * Get n-th row of DataFrame as String[].
+     *
+     * @param n number of row to return.
+     * @return Array of string representation of values in the n-th row.
+     * @throws IndexOutOfBoundsException if n is bigger or equal than current size of the column.
+     */
+    @Override
+    public String[] getStringRow(int n) {
+        if (n >= size())
+            throw new IndexOutOfBoundsException("Requested index: " + n + ", current column size: " + size());
+        String[] result = new String[width()];
+        for (int i = 0; i < width(); i++) {
+            COOValue exception = null;
+            for (int j = 0; j < columns.get(i).size(); j++) {
+                COOValue pair = (COOValue) columns.get(i).getData(j);
+                if (n == pair.getIndex()) {
+                    exception = pair;
+                    break;
+                }
+            }
+            if (exception == null) {
+                result[i] = hidden;
+            } else
+                result[i] = exception.getValue().toString();
+        }
+        return result;
+    }
+
+    /**
      * Add new row to the SparseDataFrame.
      *
      * @param objects List of objects to add. Throws exception if count doesn't match the columns count.

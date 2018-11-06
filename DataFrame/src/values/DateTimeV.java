@@ -88,6 +88,12 @@ public class DateTimeV extends Value {
 
     @Override
     public String toString() {
-        return value.getYear() + "-" + value.getMonthValue() + "-" + value.getDayOfWeek().getValue();
+        String month = String.valueOf(value.getMonthValue());
+        String day = String.valueOf(value.getDayOfWeek().getValue());
+        if (month.length() == 1)
+            month = "0" + month;
+        if (day.length() == 1)
+            day = "0" + day;
+        return value.getYear() + "-" + month + "-" + day;
     }
 }

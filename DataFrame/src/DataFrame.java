@@ -1,6 +1,7 @@
 import values.Value;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -269,6 +270,23 @@ public class DataFrame {
     }
 
     /**
+     * Get n-th row of DataFrame as String[].
+     *
+     * @param n number of row to return.
+     * @return Array of string representations of values in the n-th row.
+     * @throws IndexOutOfBoundsException if n is bigger or equal than current size of the column.
+     */
+    public String[] getStringRow(int n) {
+        if (n >= size())
+            throw new IndexOutOfBoundsException("Requested index: " + n + ", current columns size: " + size());
+        String[] result = new String[width()];
+        for (int i = 0; i < width(); i++) {
+            result[i] = columns.get(i).getData(n).toString();
+        }
+        return result;
+    }
+
+    /**
      * Get new DataFrame with only n-th row of the original one in it.
      *
      * @param n number of row to copy.
@@ -322,7 +340,7 @@ public class DataFrame {
     public void setReadOnly(boolean readOnly) {
         if (this.isReadOnly && !readOnly)
             System.out.println("You're removing a 'Read Only' flag from a DataFrame, this may lead " +
-                                       "to messing up a DataFrame this one is a shallow copy of, be aware.");
+                    "to messing up a DataFrame this one is a shallow copy of, be aware.");
         this.isReadOnly = readOnly;
     }
 
@@ -363,17 +381,59 @@ public class DataFrame {
     }
 
     /**
-     * Returns string representation of DataFrame column by column, each in new row.
+     * Returns string representation of DataFrame formatted as a table.
      *
      * @return string representation of DataFrame.
      */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (Column column : columns) {
-            sb.append(column.toString());
-            sb.append('\n');
+
+        if (size() == -1) {
+            sb.append("[Empty DataFrame]\n");
+            return sb.toString();
         }
+
+        if (size() == 0) {
+            sb.append(String.join(" | ", getColumnsNames())).append("\n");
+        } else {
+            //Create format string:
+            // 1. Find width of the widest element (including column name).
+            int[] maxWidths = new int[width()];
+            for (int i = 0; i < width(); i++) {
+                Column column = columns.get(i);
+                maxWidths[i] = column.getName().length();
+                for (int j = 0; j < column.size(); j++) {
+                    int size = column.getData(j).toString().length();
+                    if (size > maxWidths[i])
+                        maxWidths[i] = size;
+                }
+            }
+
+            // 2. Join all of it ( "| %[width]s | %[width]s | %[width]s | ... |\n" ).
+            StringBuilder formatStringBuilder = new StringBuilder();
+            formatStringBuilder.append("| ");
+            for (int i = 0; i < width(); i++) {
+                formatStringBuilder
+                        .append("%")
+                        .append(maxWidths[i])
+                        .append("s");
+                if (i < width() - 1) { // if not on the last column.
+                    formatStringBuilder.append(" | ");
+                }
+            }
+            String formatString = formatStringBuilder.toString() + " |\n";
+
+            formatString = formatString.replace("%", "%-"); //Make column names left-justified
+            sb.append(String.format(formatString, (Object[]) getColumnsNames()));
+            formatString = formatString.replace("%-", "%"); //And revert the change
+
+            //Append rows.
+            for (int i = 0; i < size(); i++) {
+                sb.append(String.format(formatString, (Object[]) getStringRow(i)));
+            }
+        }
+        sb.append("In total: ").append(size()).append(" rows.\n");
         return sb.toString();
     }
 }
