@@ -1,68 +1,64 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataFrameGroup implements Groupby{
+public class DataFrameGroup implements Groupby {
 
     private HashMap<String, DataFrame> map;
     private String groupedBy;
 
-    public DataFrameGroup(DataFrame df, String[] groupBy){
+    public DataFrameGroup(DataFrame df, String[] groupBy) {
         map = new HashMap<>();
         groupedBy = groupBy[0];
 
-        for(int i = 0; i < df.size(); i++){
-            String key = df.getColumn(groupedBy).getData(i).toString();
-            if(map.containsKey(key)){
-                map.get(key).add(df.getRowData(i));
-            } else{
+        for (int i = 0; i < df.size(); i++) {
+            String key = df.getColumn(groupedBy, false).getData(i).toString();
+            if (map.containsKey(key)) {
+                map.get(key).add(df.getValuesRow(i));
+            } else {
                 map.put(key, df.getRow(i));
             }
         }
     }
 
     @Override
-    public DataFrame max(){
+    public DataFrame max() {
         return null;
     }
 
     @Override
-    public DataFrame min(){
+    public DataFrame min() {
         return null;
     }
 
     @Override
-    public DataFrame mean(){
+    public DataFrame mean() {
         return null;
     }
 
     @Override
-    public DataFrame std(){
+    public DataFrame std() {
         return null;
     }
 
     @Override
-    public DataFrame sum(){
+    public DataFrame sum() {
         return null;
     }
 
     @Override
-    public DataFrame var(){
+    public DataFrame var() {
         return null;
     }
 
     @Override
-    public DataFrame apply(Applyable op){
+    public DataFrame apply(Applyable op) {
         return null;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
-        for(Map.Entry<String, DataFrame> entry : map.entrySet()){
-            sb.append(groupedBy);
-            sb.append(" = ");
-            sb.append(entry.getKey());
-            sb.append(":\n");
+        for (Map.Entry<String, DataFrame> entry : map.entrySet()) {
             sb.append(entry.getValue());
             sb.append('\n');
         }

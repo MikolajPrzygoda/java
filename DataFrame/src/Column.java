@@ -5,12 +5,9 @@ import java.util.ArrayList;
 
 public class Column{
 
-    protected String name;
-    protected Class<? extends Value> type;
+    private String name;
+    private Class<? extends Value> type;
     private ArrayList<Value> data;
-
-    public Column(){
-    }
 
     public Column(String name, Class<? extends Value> type){
         this.name = name;
@@ -21,7 +18,11 @@ public class Column{
     public Column(Column column){
         this.name = column.name;
         this.type = column.type;
-        this.data = new ArrayList<>(column.data);
+
+        this.data = new ArrayList<>(column.data.size());
+        for (Value v : column.data) {
+            this.data.add(v.clone());
+        }
     }
 
     public String getName(){
@@ -32,9 +33,13 @@ public class Column{
         return type;
     }
 
+    public void addData(Value value) {
+        if (type.isInstance(value))
+            data.add(value);
+    }
     public void addData(String s){
         try {
-            Value v = type.getConstructor(java.lang.String.class).newInstance(s);
+            Value v = type.getConstructor(String.class).newInstance(s);
             data.add(v);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
@@ -45,7 +50,7 @@ public class Column{
         return data.get(n);
     }
 
-    public int getSize(){
+    public int size() {
         return data.size();
     }
 

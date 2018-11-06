@@ -1,36 +1,28 @@
-import values.Integer;
+import values.DateTimeV;
+import values.DoubleV;
+import values.IntegerV;
+import values.StringV;
 
-public class Main{
+public class Main {
 
-    /**
-     * TODO:
-     * Dodaj do swojej implementacji DataFrame możliwość wczytywania danych z pliku
-     */
+    public static void main(String[] args) {
 
-    public static void main(String[] args){
+//        DataFrame df = new DataFrame("groupby.csv", new Class[]{StringV.class, DateTimeV.class, DoubleV.class, DoubleV.class});
+//        DataFrameGroup dfg = df.groupBy(new String[]{"id"});
+//        System.out.println(dfg);
 
-        DataFrame df = new DataFrame(new String[]{"kol1", "kol2", "kol3"}, new Class[]{Integer.class, Integer.class, Integer.class});
-        df.add("1", "1", "20");
-        df.add("0", "2", "19");
-        df.add("1", "3", "18");
-        df.add("5", "4", "17");
-        df.add("0", "5", "16");
-        df.add("1", "6", "15");
-        df.add("0", "7", "14");
-        df.add("5", "8", "13");
-        df.add("7", "9", "12");
-        df.add("0", "10", "11");
-        df.add("7", "11", "10");
-        df.add("5", "12", "9");
-        df.add("5", "13", "8");
-        df.add("1", "14", "7");
-        df.add("7", "15", "6");
-        df.add("1", "16", "5");
-        df.add("5", "17", "4");
-        df.add("7", "18", "3");
+        DataFrame df = new DataFrame(
+                new String[]{"Integer", "Double", "String", "DateTime"},
+                new Class[]{IntegerV.class, DoubleV.class, StringV.class, DateTimeV.class});
+
+        df.add("123",   "123.123456", "TESTTEST", "1999-07-02");
+        df.add("1234",  "123.12345",  "TESTTES",  "2000-08-01");
+        df.add("12345", "123.1234",   "TESTTE",   "2001-09-30");
+        df.add("1234",  "123.123",    "TESTT",    "2000-10-29");
+        df.add("123",   "123.12",     "TEST",     "1999-11-28");
+        df.add("12",    "123.1",      "TES",      "1998-12-27");
+
         System.out.println(df);
 
-        DataFrameGroup dfg = df.groupBy(new String[]{"kol1"});
-        System.out.println(dfg);
     }
 }
