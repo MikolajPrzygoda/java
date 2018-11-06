@@ -19,47 +19,82 @@ public class DoubleV extends Value {
 
     @Override
     public Value add(Value other) {
-        return null;
+        if (other instanceof DoubleV)
+            return new DoubleV(value + ((DoubleV) other).value);
+        else {
+            System.out.println("Tried adding non-DoubleV to DoubleV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value sub(Value other) {
-        return null;
+        if (other instanceof DoubleV)
+            return new DoubleV(value - ((DoubleV) other).value);
+        else {
+            System.out.println("Tried subtracting non-DoubleV from DoubleV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value mul(Value other) {
-        return null;
+        if (other instanceof DoubleV)
+            return new DoubleV(value * ((DoubleV) other).value);
+        else {
+            System.out.println("Tried multiplying DoubleV with non-DoubleV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value div(Value other) {
-        return null;
+        if (other instanceof DoubleV)
+            return new DoubleV(value / ((DoubleV) other).value);
+        else {
+            System.out.println("Tried dividing DoubleV by a non-DoubleV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value pow(Value other) {
-        return null;
+        if (other instanceof DoubleV)
+            return new DoubleV(Math.pow(value, ((DoubleV) other).value));
+        else {
+            System.out.println("Tried raising DoubleV to a non-DoubleV power. Returned null");
+            return null;
+        }
     }
 
     @Override
     public boolean eq(Value other) {
-        return false;
+        return this.equals(other);
     }
 
     @Override
     public boolean lte(Value other) {
-        return false;
+        if (other instanceof DoubleV)
+            return value <= ((DoubleV) other).value;
+        else {
+            System.out.println("Tried comparing DoubleV with a non-DoubleV. Returned false");
+            return false;
+        }
     }
 
     @Override
     public boolean gte(Value other) {
-        return false;
+        if (other instanceof DoubleV)
+            return value >= ((DoubleV) other).value;
+        else {
+            System.out.println("Tried comparing DoubleV with a non-DoubleV. Returned false");
+            return false;
+        }
     }
 
     @Override
     public boolean neq(Value other) {
-        return false;
+        return !this.equals(other);
     }
 
     @Override
@@ -69,8 +104,8 @@ public class DoubleV extends Value {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Double)
-            return (Double) obj == value;
+        if (obj instanceof DoubleV)
+            return ((DoubleV) obj).value == value;
         else
             return false;
     }

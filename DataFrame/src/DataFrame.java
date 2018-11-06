@@ -83,8 +83,6 @@ public class DataFrame {
             this.columns.add(new Column(columnNames[i], types[i]));
         }
         for (int i = 1; i < data.length; i++) {
-            if (i % 10000 == 0)
-                System.out.println("Added " + i + " out of " + data.length + " lines.");
             add(data[i].split(","));
         }
     }

@@ -17,9 +17,10 @@ public class DateTimeV extends Value {
 
     @Override
     public Value create(String s) {
-        return null;
+        return new DateTimeV(s);
     }
 
+    //not supported
     @Override
     public Value add(Value other) {
         return null;
@@ -44,25 +45,27 @@ public class DateTimeV extends Value {
     public Value pow(Value other) {
         return null;
     }
+    //==============
 
     @Override
     public boolean eq(Value other) {
-        return false;
+        return this.equals(other);
     }
 
     @Override
     public boolean lte(Value other) {
-        return false;
+        return value.isBefore(((DateTimeV) other).value) || value.isEqual(((DateTimeV) other).value);
     }
 
     @Override
     public boolean gte(Value other) {
-        return false;
+        return value.isAfter(((DateTimeV) other).value) || value.isEqual(((DateTimeV) other).value);
+
     }
 
     @Override
     public boolean neq(Value other) {
-        return false;
+        return !this.equals(other);
     }
 
     @Override
@@ -72,7 +75,10 @@ public class DateTimeV extends Value {
 
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (obj instanceof DateTimeV)
+            return value.isEqual(((DateTimeV) obj).value);
+        else
+            return false;
     }
 
     @Override

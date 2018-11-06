@@ -19,47 +19,82 @@ public class FloatV extends Value {
 
     @Override
     public Value add(Value other) {
-        return null;
+        if (other instanceof FloatV)
+            return new FloatV(value + ((FloatV) other).value);
+        else {
+            System.out.println("Tried adding non-FloatV to FloatV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value sub(Value other) {
-        return null;
+        if (other instanceof FloatV)
+            return new FloatV(value - ((FloatV) other).value);
+        else {
+            System.out.println("Tried subtracting non-FloatV from FloatV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value mul(Value other) {
-        return null;
+        if (other instanceof FloatV)
+            return new FloatV(value * ((FloatV) other).value);
+        else {
+            System.out.println("Tried multiplying FloatV with non-FloatV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value div(Value other) {
-        return null;
+        if (other instanceof FloatV)
+            return new FloatV(value / ((FloatV) other).value);
+        else {
+            System.out.println("Tried dividing FloatV by a non-FloatV. Returned null");
+            return null;
+        }
     }
 
     @Override
     public Value pow(Value other) {
-        return null;
+        if (other instanceof FloatV)
+            return new FloatV((float) Math.pow(value, ((FloatV) other).value));
+        else {
+            System.out.println("Tried raising FloatV to a non-FloatV power. Returned null");
+            return null;
+        }
     }
 
     @Override
     public boolean eq(Value other) {
-        return false;
+        return this.equals(other);
     }
 
     @Override
     public boolean lte(Value other) {
-        return false;
+        if (other instanceof FloatV)
+            return value <= ((FloatV) other).value;
+        else {
+            System.out.println("Tried comparing FloatV with a non-FloatV. Returned false");
+            return false;
+        }
     }
 
     @Override
     public boolean gte(Value other) {
-        return false;
+        if (other instanceof FloatV)
+            return value >= ((FloatV) other).value;
+        else {
+            System.out.println("Tried comparing FloatV with a non-FloatV. Returned false");
+            return false;
+        }
     }
 
     @Override
     public boolean neq(Value other) {
-        return false;
+        return !this.equals(other);
     }
 
     @Override
@@ -69,8 +104,8 @@ public class FloatV extends Value {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Float)
-            return (Float) obj == value;
+        if (obj instanceof FloatV)
+            return ((FloatV) obj).value == value;
         else
             return false;
     }

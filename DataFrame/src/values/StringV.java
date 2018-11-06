@@ -15,9 +15,12 @@ public class StringV extends Value {
 
     @Override
     public Value add(Value other) {
+        if (other instanceof StringV)
+            return new StringV(value + ((StringV) other).value);
         return null;
     }
-
+    
+    //not supported
     @Override
     public Value sub(Value other) {
         return null;
@@ -37,25 +40,36 @@ public class StringV extends Value {
     public Value pow(Value other) {
         return null;
     }
-
+    //=============
+    
     @Override
     public boolean eq(Value other) {
-        return false;
+        return this.equals(other);
     }
 
     @Override
     public boolean lte(Value other) {
-        return false;
+        if (other instanceof StringV)
+            return value.compareTo(((StringV) other).value) <= 0;
+        else {
+            System.out.println("Tried comparing StringV with a non-StringV. Returned false");
+            return false;
+        }
     }
 
     @Override
     public boolean gte(Value other) {
-        return false;
+        if (other instanceof StringV)
+            return value.compareTo(((StringV) other).value) >= 0;
+        else {
+            System.out.println("Tried comparing StringV with a non-StringV. Returned false");
+            return false;
+        }
     }
 
     @Override
     public boolean neq(Value other) {
-        return false;
+        return !this.equals(other);
     }
 
     @Override
@@ -65,7 +79,10 @@ public class StringV extends Value {
 
     @Override
     public boolean equals(Object obj) {
-        return false;
+        if (obj instanceof StringV)
+            return value.equals(((StringV) obj).value);
+        else
+            return false;
     }
 
     @Override
