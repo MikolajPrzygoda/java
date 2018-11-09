@@ -19,50 +19,70 @@ public class IntegerV extends Value {
 
     @Override
     public Value add(Value other) {
-        if (other instanceof IntegerV)
-            return new IntegerV(value + ((IntegerV) other).value);
+        if (other instanceof DoubleV)
+            return new IntegerV((int) (value + Double.valueOf(other.toString())));
+        else if (other instanceof FloatV)
+            return new IntegerV((int) (value + Float.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new IntegerV(value + Integer.valueOf(other.toString()));
         else {
-            System.out.println("Tried adding non-IntegerV to IntegerV. Returned null");
+            System.out.println("Tried adding number value to a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value sub(Value other) {
-        if (other instanceof IntegerV)
-            return new IntegerV(value - ((IntegerV) other).value);
+        if (other instanceof DoubleV)
+            return new IntegerV((int) (value - Double.valueOf(other.toString())));
+        else if (other instanceof FloatV)
+            return new IntegerV((int) (value - Float.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new IntegerV(value - Integer.valueOf(other.toString()));
         else {
-            System.out.println("Tried subtracting non-IntegerV from IntegerV. Returned null");
+            System.out.println("Tried subtracting number value from a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value mul(Value other) {
-        if (other instanceof IntegerV)
-            return new IntegerV(value * ((IntegerV) other).value);
+        if (other instanceof DoubleV)
+            return new IntegerV((int) (value * Double.valueOf(other.toString())));
+        else if (other instanceof FloatV)
+            return new IntegerV((int) (value * Float.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new IntegerV(value * Integer.valueOf(other.toString()));
         else {
-            System.out.println("Tried multiplying IntegerV with non-IntegerV. Returned null");
+            System.out.println("Tried multiplying number value by a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value div(Value other) {
-        if (other instanceof IntegerV)
-            return new IntegerV(value / ((IntegerV) other).value);
+        if (other instanceof DoubleV)
+            return new IntegerV((int) (value / Double.valueOf(other.toString())));
+        else if (other instanceof FloatV)
+            return new IntegerV((int) (value / Float.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new IntegerV(value / Integer.valueOf(other.toString()));
         else {
-            System.out.println("Tried dividing IntegerV by a non-IntegerV. Returned null");
+            System.out.println("Tried dividing number value by a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value pow(Value other) {
-        if (other instanceof IntegerV)
-            return new IntegerV((int) Math.pow(value, ((IntegerV) other).value));
+        if (other instanceof DoubleV)
+            return new DoubleV(Math.pow(value, Double.valueOf(other.toString())));
+        else if (other instanceof FloatV)
+            return new DoubleV(Math.pow(value, Float.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new DoubleV(Math.pow(value, Integer.valueOf(other.toString())));
         else {
-            System.out.println("Tried raising IntegerV to a non-IntegerV power. Returned null");
+            System.out.println("Tried raising number value to a non-number value. Returned null");
             return null;
         }
     }
@@ -99,7 +119,7 @@ public class IntegerV extends Value {
 
     @Override
     public int hashCode() {
-        return 0;
+        return Integer.hashCode(value);
     }
 
     @Override

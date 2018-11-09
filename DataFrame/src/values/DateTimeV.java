@@ -23,27 +23,27 @@ public class DateTimeV extends Value {
     //not supported
     @Override
     public Value add(Value other) {
-        return null;
+        return new DateTimeV("1234-12-12");
     }
 
     @Override
     public Value sub(Value other) {
-        return null;
+        return new DateTimeV("1234-12-12");
     }
 
     @Override
     public Value mul(Value other) {
-        return null;
+        return new DateTimeV("1234-12-12");
     }
 
     @Override
     public Value div(Value other) {
-        return null;
+        return new DateTimeV("1234-12-12");
     }
 
     @Override
     public Value pow(Value other) {
-        return null;
+        return new DateTimeV("1234-12-12");
     }
     //==============
 
@@ -70,7 +70,7 @@ public class DateTimeV extends Value {
 
     @Override
     public int hashCode() {
-        return 0;
+        return value.hashCode();
     }
 
     @Override
@@ -89,11 +89,14 @@ public class DateTimeV extends Value {
     @Override
     public String toString() {
         String month = String.valueOf(value.getMonthValue());
-        String day = String.valueOf(value.getDayOfWeek().getValue());
+        String day = String.valueOf(value.getDayOfMonth());
         if (month.length() == 1)
             month = "0" + month;
         if (day.length() == 1)
             day = "0" + day;
+        if (value.getYear() == 1985 && Integer.valueOf(month) == 2 && Integer.valueOf(day) == 1) {
+            throw new IllegalStateException("WAT");
+        }
         return value.getYear() + "-" + month + "-" + day;
     }
 }

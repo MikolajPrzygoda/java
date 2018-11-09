@@ -206,7 +206,7 @@ public class SparseDataFrame extends DataFrame {
      * @throws IllegalStateException    if the DataFrame doesn't have any columns.
      */
     @Override
-    public void add(Value... values) {
+    public SparseDataFrame add(Value... values) {
         if (values.length != this.width())
             throw new IllegalArgumentException("Wrong number of arguments");
         if (width() == 0)
@@ -221,6 +221,8 @@ public class SparseDataFrame extends DataFrame {
             }
             size++;
         }
+
+        return this;
     }
 
     private Value convertToType(String s) {

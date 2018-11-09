@@ -1,7 +1,7 @@
 import values.Value;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -13,7 +13,7 @@ public class DataFrame {
      */
     protected boolean isReadOnly = false;
     protected List<Column> columns;
-
+    private final boolean PROGRESS_OUTPUT = true;
     /**
      * Default constructor creating empty DataFrame.
      */
@@ -85,6 +85,16 @@ public class DataFrame {
         }
         for (int i = 1; i < data.length; i++) {
             add(data[i].split(","));
+
+            if (PROGRESS_OUTPUT) {
+                if (i % 50000 == 0) {
+                    System.out.print(String.format("\rLoading from file: %.2f%%...", i / (double) data.length * 100));
+                }
+            }
+        }
+        if (PROGRESS_OUTPUT) {
+            System.out.print("\r                          \r");
+            System.out.println("File Loaded.");
         }
     }
 
@@ -123,10 +133,11 @@ public class DataFrame {
      * Add new row to the DataFrame.
      *
      * @param values List of values to add.
+     * @return Modified DataFrame
      * @throws IllegalArgumentException if number of arguments doesn't match DataFrame width.
      * @throws IllegalStateException    if the DataFrame is isReadOnly when adding new row.
      */
-    public void add(Value... values) {
+    public DataFrame add(Value... values) {
         if (values.length != this.width())
             throw new IllegalArgumentException("Wrong number of arguments");
         if (isReadOnly)
@@ -135,6 +146,8 @@ public class DataFrame {
         for (int i = 0; i < values.length; i++) {
             columns.get(i).addData(values[i]);
         }
+
+        return this;
     }
 
     /**
@@ -177,13 +190,13 @@ public class DataFrame {
     }
 
     /**
-     * Returns one column from DataFrame. Helper function with copy parameter for two argument method set to true.
+     * Returns one column from DataFrame. Helper function with copy parameter for two argument method set to false.
      *
      * @param columnName Name of the column to retrieve.
-     * @return Wanted deep copied column object.
+     * @return Reference to wanted column object.
      */
     public Column getColumn(String columnName) {
-        return this.getColumn(columnName, true);
+        return this.getColumn(columnName, false);
     }
 
     /**
@@ -200,6 +213,15 @@ public class DataFrame {
             }
         }
         return null;
+    }
+
+    /**
+     * Returns Column[] with the references to all the columns in a DataFrame.
+     *
+     * @return Column[] with the references to all the columns in a DataFrame.
+     */
+    public Column[] getColumns() {
+        return columns.toArray(new Column[0]);
     }
 
     /**
@@ -370,14 +392,40 @@ public class DataFrame {
         return result;
     }
 
+    public DataFrame merge(DataFrame df) {
+        for (int i = 0; i < df.size(); i++) {
+            add(df.getValuesRow(i));
+        }
+        return this;
+    }
+
     /**
-     * TODO
-     *
      * @param columnNames
      * @return
      */
     public DataFrameGroup groupBy(String[] columnNames) {
         return new DataFrameGroup(this, columnNames);
+    }
+
+    public DataFrame sortBy(String columnName) {
+        DataFrame result = new DataFrame(getColumnsNames(), getColumnsTypes());
+        List<Integer> copied = new LinkedList<>();
+        Column column = getColumn(columnName);
+        for (int i = 0; i < size(); i++) {
+            Value max = null;
+            int maxIndex = 0;
+            for (int index = 0; index < column.size(); index++) {
+                if (copied.contains(index))
+                    continue;
+                if (max == null || column.getData(index).lte(max)) {
+                    max = column.getData(index);
+                    maxIndex = index;
+                }
+            }
+            copied.add(maxIndex);
+            result.add(getValuesRow(maxIndex));
+        }
+        return result;
     }
 
     /**
@@ -404,7 +452,13 @@ public class DataFrame {
                 Column column = columns.get(i);
                 maxWidths[i] = column.getName().length();
                 for (int j = 0; j < column.size(); j++) {
-                    int size = column.getData(j).toString().length();
+                    Value data = column.getData(j);
+                    String s;
+                    if (data == null)
+                        s = "null";
+                    else
+                        s = data.toString();
+                    int size = s.length();
                     if (size > maxWidths[i])
                         maxWidths[i] = size;
                 }

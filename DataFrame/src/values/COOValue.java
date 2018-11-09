@@ -121,7 +121,7 @@ public class COOValue extends Value {
 
     @Override
     public int hashCode() {
-        return 0;
+        return value.hashCode();
     }
 
     @Override

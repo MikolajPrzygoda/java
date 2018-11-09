@@ -19,50 +19,70 @@ public class FloatV extends Value {
 
     @Override
     public Value add(Value other) {
-        if (other instanceof FloatV)
-            return new FloatV(value + ((FloatV) other).value);
+        if (other instanceof DoubleV)
+            return new FloatV((float) (value + Double.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new FloatV(value + Integer.valueOf(other.toString()));
+        else if (other instanceof FloatV)
+            return new FloatV(value + Float.valueOf(other.toString()));
         else {
-            System.out.println("Tried adding non-FloatV to FloatV. Returned null");
+            System.out.println("Tried adding number value to a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value sub(Value other) {
-        if (other instanceof FloatV)
-            return new FloatV(value - ((FloatV) other).value);
+        if (other instanceof DoubleV)
+            return new FloatV((float) (value - Double.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new FloatV(value - Integer.valueOf(other.toString()));
+        else if (other instanceof FloatV)
+            return new FloatV(value - Float.valueOf(other.toString()));
         else {
-            System.out.println("Tried subtracting non-FloatV from FloatV. Returned null");
+            System.out.println("Tried subtracting number value from a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value mul(Value other) {
-        if (other instanceof FloatV)
-            return new FloatV(value * ((FloatV) other).value);
+        if (other instanceof DoubleV)
+            return new FloatV((float) (value * Double.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new FloatV(value * Integer.valueOf(other.toString()));
+        else if (other instanceof FloatV)
+            return new FloatV(value * Float.valueOf(other.toString()));
         else {
-            System.out.println("Tried multiplying FloatV with non-FloatV. Returned null");
+            System.out.println("Tried multiplying number value by a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value div(Value other) {
-        if (other instanceof FloatV)
-            return new FloatV(value / ((FloatV) other).value);
+        if (other instanceof DoubleV)
+            return new FloatV((float) (value / Double.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new FloatV(value / Integer.valueOf(other.toString()));
+        else if (other instanceof FloatV)
+            return new FloatV(value / Float.valueOf(other.toString()));
         else {
-            System.out.println("Tried dividing FloatV by a non-FloatV. Returned null");
+            System.out.println("Tried dividing number value by a non-number value. Returned null");
             return null;
         }
     }
 
     @Override
     public Value pow(Value other) {
-        if (other instanceof FloatV)
-            return new FloatV((float) Math.pow(value, ((FloatV) other).value));
+        if (other instanceof DoubleV)
+            return new DoubleV(Math.pow(value, Double.valueOf(other.toString())));
+        else if (other instanceof FloatV)
+            return new DoubleV(Math.pow(value, Float.valueOf(other.toString())));
+        else if (other instanceof IntegerV)
+            return new DoubleV(Math.pow(value, Integer.valueOf(other.toString())));
         else {
-            System.out.println("Tried raising FloatV to a non-FloatV power. Returned null");
+            System.out.println("Tried raising number value to a non-number value. Returned null");
             return null;
         }
     }
@@ -99,7 +119,7 @@ public class FloatV extends Value {
 
     @Override
     public int hashCode() {
-        return 0;
+        return Float.hashCode(value);
     }
 
     @Override

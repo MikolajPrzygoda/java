@@ -17,28 +17,29 @@ public class StringV extends Value {
     public Value add(Value other) {
         if (other instanceof StringV)
             return new StringV(value + ((StringV) other).value);
-        return null;
+        else
+            return new StringV("null");
     }
     
     //not supported
     @Override
     public Value sub(Value other) {
-        return null;
+        return new StringV("null");
     }
 
     @Override
     public Value mul(Value other) {
-        return null;
+        return new StringV("null");
     }
 
     @Override
     public Value div(Value other) {
-        return null;
+        return new StringV("null");
     }
 
     @Override
     public Value pow(Value other) {
-        return null;
+        return new StringV("null");
     }
     //=============
     
@@ -74,7 +75,7 @@ public class StringV extends Value {
 
     @Override
     public int hashCode() {
-        return 0;
+        return value.hashCode();
     }
 
     @Override
