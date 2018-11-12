@@ -65,81 +65,71 @@ public class Column{
 
     public Column add(Value value) {
         Column result = new Column(name, type);
-        for (Value d : data) {
+        for(Value d : data)
             result.addData(d.add(value));
-        }
         return result;
     }
 
     public Column add(Column other) {
         Column result = new Column(name, type);
-        for (int i = 0; i < data.size(); i++) {
+        for(int i = 0; i < data.size(); i++)
             result.addData(data.get(i).add(other.getData(i)));
-        }
         return result;
     }
 
     public Column sub(Value value) {
         Column result = new Column(name, type);
-        for (Value d : data) {
+        for(Value d : data)
             result.addData(d.sub(value));
-        }
         return result;
     }
 
     public Column sub(Column other) {
         Column result = new Column(name, type);
-        for (int i = 0; i < data.size(); i++) {
+        for(int i = 0; i < data.size(); i++)
             result.addData(data.get(i).sub(other.getData(i)));
-        }
         return result;
     }
 
     public Column mul(Value value) {
         Column result = new Column(name, type);
-        for (Value d : data) {
+        for(Value d : data)
             result.addData(d.mul(value));
-        }
         return result;
     }
 
     public Column mul(Column other) {
         Column result = new Column(name, type);
-        for (int i = 0; i < data.size(); i++) {
+        for(int i = 0; i < data.size(); i++)
             result.addData(data.get(i).mul(other.getData(i)));
-        }
         return result;
     }
 
     public Column div(Value value) {
         Column result = new Column(name, type);
-        for (Value d : data) {
+        for(Value d : data)
             result.addData(d.div(value));
-        }
         return result;
     }
 
     public Column div(Column other) {
         Column result = new Column(name, type);
-        for (int i = 0; i < data.size(); i++) {
+        for(int i = 0; i < data.size(); i++)
             result.addData(data.get(i).div(other.getData(i)));
-        }
         return result;
     }
 
     public Column pow(Value value) {
         Column result = new Column(name, type);
-        for (Value d : data) {
+        for(Value d : data)
             result.addData(d.pow(value));
-        }
         return result;
     }
 
     public Column pow(Column other) {
         Column result = new Column(name, type);
-        for (int i = 0; i < data.size(); i++) {
+        for(int i = 0; i < data.size(); i++)
             result.addData(data.get(i).pow(other.getData(i)));
-        }
         return result;
     }
 

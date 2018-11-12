@@ -2,29 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98e2f0fd-81a3-44f7-856e-d8654cb4d5e1" name="Default" comment="Change project name and directory name. Add JavaFX to the project">
-      <change afterPath="$PROJECT_DIR$/resources/base/layout.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/base/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/base/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/base/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/JavaFX_11_0_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/JavaFX_11_0_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/groupby.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/groupby.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/groupbymulti.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/groupbymulti.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/max.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/max.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/mean.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/mean.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/min.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/min.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/std.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/std.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sum.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/sum.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/test" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/var.csv" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/var.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Applable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/Applable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/Column.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/DataFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFrameGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/DataFrameGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Groupby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/Groupby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SparseDataFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/SparseDataFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/base/layout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/base/layout.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dataFrame/Column.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dataFrame/Column.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,70 +79,89 @@
     <session id="219255102">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.2" value="2" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="fxml" value="1" />
-          <entry key="java" value="48" />
+          <entry key="fxml" value="495" />
+          <entry key="java" value="6895" />
           <entry key="txt" value="77" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="48" />
+          <entry key="JAVA" value="6895" />
           <entry key="PLAIN_TEXT" value="77" />
-          <entry key="XML" value="1" />
+          <entry key="XML" value="495" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="1" />
-          <entry key="fxml" value="5" />
-          <entry key="java" value="6" />
+          <entry key="class" value="3" />
+          <entry key="csv" value="5" />
+          <entry key="fxml" value="10" />
+          <entry key="java" value="16" />
+          <entry key="test" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="1" />
-          <entry key="JAVA" value="6" />
-          <entry key="XML" value="5" />
+          <entry key="CLASS" value="3" />
+          <entry key="CSV" value="5" />
+          <entry key="JAVA" value="16" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="XML" value="10" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/base/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="198">
+              <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#252#253#0" expanded="true" />
+                <element signature="e#280#281#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/base/Util.java">
+        <entry file="file://$PROJECT_DIR$/resources/base/layout.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="-103">
+              <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
             </state>
           </provider>
+          <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dataFrame/DataFrame.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/base/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+            <state relative-caret-position="-778">
+              <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#fileNameChange#0;class#Controller#0" />
+                <element signature="method#fileNameKeyPressed#0;class#Controller#0" />
+                <element signature="method#addColumn#0;class#Controller#0" />
+                <element signature="method#removeColumn#0;class#Controller#0" />
+                <element signature="method#loadColumns#0;class#Controller#0" />
+                <element signature="method#listClick#0;class#Controller#0" />
+                <element signature="method#setCurrentColumn#0;class#Controller#0" />
+                <element signature="method#nameChange#0;class#Controller#0" />
+                <element signature="method#typeChange#0;class#Controller#0" />
+                <element signature="method#typeToIndex#0;class#Controller#0" />
+                <element signature="method#loadFile#0;class#Controller#0" />
+                <element signature="e#8193#8194#0" expanded="true" />
+                <element signature="e#8244#8245#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -168,8 +173,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit4 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -188,6 +193,10 @@
       <find>return null</find>
       <find>DoubleV</find>
       <find>getCo</find>
+      <find>disable</find>
+      <find>columnTypeStrings[i] =</find>
+      <find>typeToIndex</find>
+      <find>System</find>
     </findStrings>
     <replaceStrings>
       <replace>df</replace>
@@ -196,6 +205,7 @@
       <replace>return new DateTimeV(&quot;0000-00-00&quot;)</replace>
       <replace>return new DateTimeV(&quot;1234-12-12&quot;)</replace>
       <replace>FloatV</replace>
+      <replace>return</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/out/production/HelloWorld</dir>
@@ -207,11 +217,6 @@
       <map>
         <entry key="$PROJECT_DIR$/.." value="Rework" />
       </map>
-    </option>
-  </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
     </option>
   </component>
   <component name="IdeDocumentHistory">
@@ -247,8 +252,13 @@
         <option value="$PROJECT_DIR$/resources/layout.fxml" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/dataFrame/DataFrame.java" />
+        <option value="$PROJECT_DIR$/src/Controller.java" />
+        <option value="$PROJECT_DIR$/src/base/Pair.java" />
         <option value="$PROJECT_DIR$/src/base/Main.java" />
+        <option value="$PROJECT_DIR$/src/dataFrame/Column.java" />
+        <option value="$PROJECT_DIR$/src/base/Util.java" />
         <option value="$PROJECT_DIR$/resources/base/layout.fxml" />
+        <option value="$PROJECT_DIR$/src/base/Controller.java" />
       </list>
     </option>
   </component>
@@ -301,6 +311,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -330,13 +342,21 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="base" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Programowanie Obiektowe - Projekt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projekt" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="dataFrame" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Programowanie Obiektowe - Projekt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Projekt" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -346,15 +366,17 @@
     <property name="Repository.Attach.Sources" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542057494362" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="last.edited.regexp" value="Sample Text" />
+    <property name="last.edited.regexp" value="1134-23-12" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -391,18 +413,11 @@
       <option name="MAIN_CLASS_NAME" value="base.Main" />
       <module name="Main" />
       <option name="VM_PARAMETERS" value="--module-path /usr/lib/jvm/javafx-sdk-11.0.1/lib --add-modules=javafx.controls,javafx.fxml" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="RunConfigurationTask" enabled="true" run_configuration_name="ColumnTest" run_configuration_type="JUnit" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <method v="2">
-        <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="ColumnTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
@@ -446,6 +461,7 @@
       <workItem from="1540473704353" duration="419000" />
       <workItem from="1540539258879" duration="5179000" />
       <workItem from="1540642941988" duration="943000" />
+      <workItem from="1542035420754" duration="21922000" />
     </task>
     <task id="LOCAL-00001" summary="cw1 - zadanie domowe - DataFrame">
       <created>1539121421700</created>
@@ -486,39 +502,39 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ColumnTest - 2018.11.11 at 17h 08m 56s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 25m 04s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 10m 06s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 26m 01s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 11m 14s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 36m 28s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 16m 47s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 40m 42s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 18m 20s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 44m 12s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 25m 30s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 47m 21s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 26m 30s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 21h 54m 40s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 27m 17s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 22h 10m 51s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 28m 06s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 22h 11m 19s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ColumnTest - 2018.11.12 at 14h 39m 10s.xml">
+    <history-entry file="ColumnTest - 2018.11.12 at 22h 11m 50s.xml">
       <configuration name="ColumnTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74281000" />
+    <option name="totallyTimeSpent" value="96203000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -530,27 +546,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+    <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18741722" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18926397" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Image Layers" order="6" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49933776" weight="0.39060402" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4080537" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49933776" visible="true" weight="0.24756756" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.40756756" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32885906" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50066227" side_tool="true" weight="0.3342282" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32885906" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3261745" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32540542" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -559,7 +576,7 @@
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Theme Preview" order="7" />
-      <window_info anchor="right" x="100" y="127" width="1400" height="673" id="Documentation" order="8" type="FLOATING" />
+      <window_info anchor="right" x="100" y="127" width="1400" height="673" id="Documentation" order="8" side_tool="true" weight="0.32982844" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
     </layout>
   </component>
@@ -599,11 +616,6 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="size()" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -620,10 +632,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_92/src.zip!/java/util/ArrayList.java" />
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_92/src.zip!/java/lang/reflect/Method.java" />
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_92/jre/lib/rt.jar!/sun/launcher/LauncherHelper.class" />
-    <entry file="jar:///usr/lib/jvm/jdk1.8.0_92/src.zip!/java/lang/ClassLoader.java" />
     <entry file="jar:///usr/lib/jvm/jdk1.8.0_92/src.zip!/java/net/URLClassLoader.java" />
     <entry file="file://$PROJECT_DIR$/src/C00Value.java" />
     <entry file="file://$PROJECT_DIR$/out/production/HelloWorld/values/COOValue.class" />
@@ -636,13 +644,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SparseColumn.java" />
-    <entry file="file://$PROJECT_DIR$/resources/base/data.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="18">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jrt:///usr/lib/jvm/default-java!/java.base/java/lang/Class.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -668,13 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="156">
           <caret line="784" column="15" selection-start-line="784" selection-start-column="15" selection-end-line="784" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/base/test">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -732,13 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/base/groupby.csv">
-      <provider selected="true" editor-type-id="LargeFileEditor">
-        <state relative-caret-position="198">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/base/mean.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -747,13 +734,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ProgOb Project.iml" />
     <entry file="file://$PROJECT_DIR$/DataFrame.iml" />
-    <entry file="jar://$PROJECT_DIR$/lib/junit-4.12-sources.jar!/org/junit/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="75" column="5" lean-forward="true" selection-start-line="75" selection-start-column="5" selection-end-line="75" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/junit-4.12-sources.jar!/org/junit/Test.java" />
     <entry file="file://$PROJECT_DIR$/test/MyTestClass.java" />
     <entry file="file://$PROJECT_DIR$/.idea/libraries/JUnit_4_12.xml" />
     <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
@@ -830,51 +811,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/base/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ColumnTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/base/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dataFrame/Column.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/Test.java" />
     <entry file="file://$PROJECT_DIR$/src/dataFrame/Applable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dataFrame/DataFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -885,27 +826,130 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ColumnTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="7" column="27" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/javafx-sdk-11.0.1/lib/javafx.graphics.jar!/javafx/scene/Node.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="869" column="32" selection-start-line="869" selection-start-column="32" selection-end-line="869" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/Pair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <element signature="e#231#232#0" expanded="true" />
+            <element signature="e#273#274#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/base/data.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="18">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/javafx-sdk-11.0.1/lib/javafx.graphics.jar!/com/sun/javafx/tk/quantum/QuantumToolkit.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="270" lean-forward="true" selection-start-line="270" selection-end-line="270" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dataFrame/Column.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/base/test">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dataFrame/DataFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/base/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="209">
+          <caret line="65" column="61" lean-forward="true" selection-start-line="65" selection-start-column="61" selection-end-line="65" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/base/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#252#253#0" expanded="true" />
+            <element signature="e#280#281#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/base/groupby.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="198">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/base/layout.fxml">
-      <provider editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-103">
+          <caret line="23" column="15" lean-forward="true" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/base/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/base/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="-778">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#fileNameChange#0;class#Controller#0" />
+            <element signature="method#fileNameKeyPressed#0;class#Controller#0" />
+            <element signature="method#addColumn#0;class#Controller#0" />
+            <element signature="method#removeColumn#0;class#Controller#0" />
+            <element signature="method#loadColumns#0;class#Controller#0" />
+            <element signature="method#listClick#0;class#Controller#0" />
+            <element signature="method#setCurrentColumn#0;class#Controller#0" />
+            <element signature="method#nameChange#0;class#Controller#0" />
+            <element signature="method#typeChange#0;class#Controller#0" />
+            <element signature="method#typeToIndex#0;class#Controller#0" />
+            <element signature="method#loadFile#0;class#Controller#0" />
+            <element signature="e#8193#8194#0" expanded="true" />
+            <element signature="e#8244#8245#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -950,7 +994,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>11</last-edited>
+          <last-edited>10</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -962,7 +1006,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>ProgOb Project</last-edited>
+          <last-edited>Main</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -974,7 +1018,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>junit:junit:4.12</last-edited>
+          <last-edited>JavaFX 11.0.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
