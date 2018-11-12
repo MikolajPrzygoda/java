@@ -1,3 +1,7 @@
+package base;
+
+import base.Main;
+
 import java.io.*;
 
 public class Util {

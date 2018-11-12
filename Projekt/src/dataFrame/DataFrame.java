@@ -1,3 +1,6 @@
+package dataFrame;
+
+import base.Util;
 import values.Value;
 
 import java.util.ArrayList;
@@ -14,6 +17,7 @@ public class DataFrame {
     protected boolean isReadOnly = false;
     protected List<Column> columns;
     private final boolean PROGRESS_OUTPUT = true;
+
     /**
      * Default constructor creating empty DataFrame.
      */
@@ -118,9 +122,9 @@ public class DataFrame {
     }
 
     /**
-     * Add a new Column to the DataFrame, only if there's no rows in the DataFrame.
+     * Add a new dataFrame.Column to the DataFrame, only if there's no rows in the DataFrame.
      *
-     * @param column Column to be added to the DataFrame.
+     * @param column dataFrame.Column to be added to the DataFrame.
      * @throws IllegalStateException if there's anything in the DataFrame or the column.
      */
     public void addColumn(Column column) {
@@ -216,9 +220,9 @@ public class DataFrame {
     }
 
     /**
-     * Returns Column[] with the references to all the columns in a DataFrame.
+     * Returns dataFrame.Column[] with the references to all the columns in a DataFrame.
      *
-     * @return Column[] with the references to all the columns in a DataFrame.
+     * @return dataFrame.Column[] with the references to all the columns in a DataFrame.
      */
     public Column[] getColumns() {
         return columns.toArray(new Column[0]);
@@ -266,7 +270,7 @@ public class DataFrame {
     }
 
     /**
-     * Helper function to copy only the Column structure without the data in them.
+     * Helper function to copy only the dataFrame.Column structure without the data in them.
      *
      * @return New DataFrame with copied structure.
      */
@@ -362,7 +366,7 @@ public class DataFrame {
     public void setReadOnly(boolean readOnly) {
         if (this.isReadOnly && !readOnly)
             System.out.println("You're removing a 'Read Only' flag from a DataFrame, this may lead " +
-                    "to messing up a DataFrame this one is a shallow copy of, be aware.");
+                                       "to messing up a DataFrame this one is a shallow copy of, be aware.");
         this.isReadOnly = readOnly;
     }
 

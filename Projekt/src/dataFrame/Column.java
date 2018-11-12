@@ -1,7 +1,8 @@
+package dataFrame;
+
 import values.Value;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class Column{
@@ -45,6 +46,7 @@ public class Column{
                             " tried adding value of type: " + value.getClass().toString());
         }
     }
+
     public void addData(String s){
         try {
             data.add(type.getConstructor(String.class).newInstance(s));
