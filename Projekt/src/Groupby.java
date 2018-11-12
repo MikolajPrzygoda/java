@@ -12,5 +12,5 @@ public interface Groupby{
 
     DataFrame var();
 
-    DataFrame apply(Applyable op);
+    DataFrame apply(Applable op);
 }

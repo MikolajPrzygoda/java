@@ -1,4 +1,3 @@
-public interface Applyable{
-
+public interface Applable {
     DataFrame apply(DataFrame df);
 }

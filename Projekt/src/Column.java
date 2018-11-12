@@ -1,6 +1,7 @@
 import values.Value;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class Column{
@@ -46,8 +47,7 @@ public class Column{
     }
     public void addData(String s){
         try {
-            Value v = type.getConstructor(String.class).newInstance(s);
-            data.add(v);
+            data.add(type.getConstructor(String.class).newInstance(s));
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
         }

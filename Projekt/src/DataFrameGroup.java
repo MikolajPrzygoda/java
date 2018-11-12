@@ -248,7 +248,7 @@ public class DataFrameGroup implements Groupby {
     }
 
     @Override
-    public DataFrame apply(Applyable op) {
+    public DataFrame apply(Applable op) {
         DataFrame result = new DataFrame(columnNames, columnTypes);
         for (var entry : map.entrySet())
             result.merge(op.apply(entry.getValue()));
