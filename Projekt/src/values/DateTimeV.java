@@ -20,7 +20,7 @@ public class DateTimeV extends Value {
         return new DateTimeV(s);
     }
 
-    //not supported
+    //<not supported>
     @Override
     public Value add(Value other) {
         return new DateTimeV("1234-12-12");
@@ -45,7 +45,7 @@ public class DateTimeV extends Value {
     public Value pow(Value other) {
         return new DateTimeV("1234-12-12");
     }
-    //==============
+    //</not supported>
 
     @Override
     public boolean eq(Value other) {
@@ -90,13 +90,10 @@ public class DateTimeV extends Value {
     public String toString() {
         String month = String.valueOf(value.getMonthValue());
         String day = String.valueOf(value.getDayOfMonth());
-        if (month.length() == 1)
-            month = "0" + month;
-        if (day.length() == 1)
-            day = "0" + day;
-        if (value.getYear() == 1985 && Integer.valueOf(month) == 2 && Integer.valueOf(day) == 1) {
-            throw new IllegalStateException("WAT");
-        }
+
+        month = month.length() == 1 ? "0" + month : month;
+        day = day.length() == 1 ? "0" + day : day;
+
         return value.getYear() + "-" + month + "-" + day;
     }
 }

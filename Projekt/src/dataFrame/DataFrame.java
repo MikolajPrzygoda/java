@@ -1,6 +1,7 @@
 package dataFrame;
 
 import base.Util;
+import javafx.beans.property.DoubleProperty;
 import values.Value;
 
 import java.util.ArrayList;
@@ -103,6 +104,40 @@ public class DataFrame {
     }
 
     /**
+     * Constructs DataFrame and reads data from file. First line consists of names of the columns to create.
+     * Sets the progress variable given as parameter.
+     *
+     * @param fileName file to read.
+     * @param types    types of columns.
+     * @param progress reference to a variable storing progress of the loading.
+     */
+    public DataFrame(String fileName, Class<? extends Value>[] types, DoubleProperty progress) {
+        String[] data = Util.loadFile(fileName);
+        String[] columnNames = data[0].split(",");
+
+        this.columns = new ArrayList<>(columnNames.length);
+        for (int i = 0; i < columnNames.length; i++) {
+            this.columns.add(new Column(columnNames[i], types[i]));
+        }
+        for (int i = 1; i < data.length; i++) {
+            add(data[i].split(","));
+
+            if (PROGRESS_OUTPUT) {
+                if (i % 50000 == 0) {
+                    System.out.print(String.format("\rLoading from file: %.2f%%...", i / (double) data.length * 100));
+                }
+            }
+            if (i % 1000 == 0)
+                progress.set(i / (double) data.length);
+        }
+        if (PROGRESS_OUTPUT) {
+            System.out.print("\r                          \r");
+            System.out.println("File Loaded.");
+        }
+        progress.set(1);
+    }
+
+    /**
      * Constructs DataFrame and reads data from file.
      *
      * @param fileName    file to read.
@@ -119,6 +154,39 @@ public class DataFrame {
         for (String line : data) {
             add(line.split(","));
         }
+    }
+
+    /**
+     * Constructs DataFrame and reads data from file. Sets the progress variable given as parameter.
+     *
+     * @param fileName    file to read.
+     * @param types       types of columns.
+     * @param columnNames names of columns.
+     * @param progress    reference to a variable storing progress of the loading.
+     */
+    public DataFrame(String fileName, Class<? extends Value>[] types, String[] columnNames, DoubleProperty progress) {
+        String[] data = Util.loadFile(fileName);
+
+        this.columns = new ArrayList<>(columnNames.length);
+        for (int i = 0; i < columnNames.length; i++) {
+            this.columns.add(new Column(columnNames[i], types[i]));
+        }
+        for (int i = 1; i < data.length; i++) {
+            add(data[i].split(","));
+
+            if (PROGRESS_OUTPUT) {
+                if (i % 50000 == 0) {
+                    System.out.print(String.format("\rLoading from file: %.2f%%...", i / (double) data.length * 100));
+                }
+            }
+            if (i % 1000 == 0)
+                progress.set(i / (double) data.length);
+        }
+        if (PROGRESS_OUTPUT) {
+            System.out.print("\r                          \r");
+            System.out.println("File Loaded.");
+        }
+        progress.set(1);
     }
 
     /**

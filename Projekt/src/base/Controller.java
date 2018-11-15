@@ -2,7 +2,14 @@ package base;
 
 import dataFrame.Column;
 import dataFrame.DataFrame;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableDoubleValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,6 +43,7 @@ public class Controller{
     public TableView dataFrameTableView;
     public Tab dataFrameTab;
     public TabPane mainTabPane;
+    public ProgressBar fileLoadProgressBar;
 
     private DataFrame df;
     private String fileName = "";
@@ -190,12 +198,15 @@ public class Controller{
     }
 
     public void loadFile(ActionEvent actionEvent){
-
-        //TODO: Add progress bar while loading a file.
+        //Setup progress bar functionality
+        DoubleProperty progress = new SimpleDoubleProperty(0);
+        progress.addListener((observableValue, oldValue, newValue) -> {
+            fileLoadProgressBar.setProgress(newValue.doubleValue());
+        });
+        fileLoadProgressBar.setDisable(false);
 
         String[] columnNames = new String[columnListView.getItems().size()];
         Class[] columnTypes = new Class[columnListView.getItems().size()];
-
         for(int i = 0; i < columnPairs.size(); i++){
             var pair = columnPairs.get(i);
             columnNames[i] = pair.first;
@@ -204,15 +215,11 @@ public class Controller{
 
         try{
             if(fileWithNamesCheckBox.isSelected())
-                df = new DataFrame(fileName, columnTypes);
+                df = new DataFrame(fileName, columnTypes, progress);
             else
-                df = new DataFrame(fileName, columnTypes, columnNames);
+                df = new DataFrame(fileName, columnTypes, columnNames, progress);
 
             onDataFrameLoad();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText("DataFrame loaded from file.");
-            alert.showAndWait();
         }
         catch(Exception ignored){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -224,8 +231,12 @@ public class Controller{
     }
 
     private void onDataFrameLoad(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("DataFrame loaded from file.");
+        alert.showAndWait();
+
         setupDataFramePane();
-        setupApplyPane();
+//        setupApplyPane();
         mainTabPane.getSelectionModel().select(dataFrameTab);
     }
 
