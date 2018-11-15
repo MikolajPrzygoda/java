@@ -34,6 +34,8 @@ public class Controller{
     public Label noDataFrameLabel1;
     public Label noDataFrameLabel2;
     public TableView dataFrameTableView;
+    public Tab dataFrameTab;
+    public TabPane mainTabPane;
 
     private DataFrame df;
     private String fileName = "";
@@ -188,6 +190,9 @@ public class Controller{
     }
 
     public void loadFile(ActionEvent actionEvent){
+
+        //TODO: Add progress bar while loading a file.
+
         String[] columnNames = new String[columnListView.getItems().size()];
         Class[] columnTypes = new Class[columnListView.getItems().size()];
 
@@ -221,6 +226,7 @@ public class Controller{
     private void onDataFrameLoad(){
         setupDataFramePane();
         setupApplyPane();
+        mainTabPane.getSelectionModel().select(dataFrameTab);
     }
 
     private void setupDataFramePane(){

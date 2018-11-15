@@ -14,7 +14,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+<TabPane fx:id="mainTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="400.0"
          prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.172-ea"
          xmlns:fx="http://javafx.com/fxml/1" fx:controller="base.Controller">
     <Tab closable="false" text="Load file">
@@ -57,7 +58,7 @@
                       text="Column names in file"/>
         </Pane>
     </Tab>
-    <Tab text="Data frame">
+    <Tab fx:id="dataFrameTab" text="Data frame">
         <Pane prefHeight="200.0" prefWidth="200.0">
             <Label fx:id="noDataFrameLabel1" layoutX="86.0" layoutY="95.0" text="¯\_(ツ)_/¯">
                 <font>
